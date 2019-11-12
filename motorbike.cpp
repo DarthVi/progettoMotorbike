@@ -296,6 +296,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
 
     glPushMatrix();
 
+    glDisable(GL_TEXTURE_2D);
     glTranslate(wheelFR1.Center() );
     glRotatef(sterzo,0,1,0);
     glRotatef(-mozzoA,1,0,0);

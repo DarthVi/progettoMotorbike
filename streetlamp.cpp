@@ -67,7 +67,7 @@ void drawStreetLamp(float posx, float posy, float posz, bool shadow)
     glTranslatef(posx, posy, posz);
     streetlampMesh.RenderNxV();
     if(!shadow)
-        drawLampLight(posx, posy, posz, 1);
+        drawLampLight(0, 10, 0, 1);
     glPopMatrix();
 
     glPopMatrix();
@@ -85,16 +85,16 @@ void drawLampLight(float posx, float posy, float posz, int lightN)
     float col1[4]= {0.5,0.5,0.0,  1};
     glLightfv(usedLight, GL_AMBIENT, col1);
 
-    float tmpPos[4] = {posx, posy +10, posz,  1}; // ultima comp=1 => luce posizionale
+    float tmpPos[4] = {posx, posy, posz,  1}; // ultima comp=1 => luce posizionale
     glLightfv(usedLight, GL_POSITION, tmpPos );
 
     float tmpDir[4] = { -2, -25, -2, 0 }; // ultima comp=1 => luce posizionale
     glLightfv(usedLight, GL_SPOT_DIRECTION, tmpDir );
 
-    glLightf (usedLight, GL_SPOT_CUTOFF, 20);
+    glLightf (usedLight, GL_SPOT_CUTOFF, 15);
     glLightf (usedLight, GL_SPOT_EXPONENT,3);
 
-    //printf("Accesa luce lampione\n");
+    //printf("%f\n", &posz);
 
     //glLightf(usedLight,GL_CONSTANT_ATTENUATION,0);
     //glLightf(usedLight,GL_LINEAR_ATTENUATION,1);

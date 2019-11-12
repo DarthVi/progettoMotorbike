@@ -474,7 +474,7 @@ void rendering(SDL_Window *win){
   drawFloor(); // disegna il suolo
   //drawPista(); // disegna la pista
   tabellone.DrawTabellone(); //disegna il tabellone
-  streetlamp.DrawStreetlamp(0, 0, 0);
+  streetlamp.DrawStreetlamp(0, 0, -10);
   
   motorbike.Render(); // disegna la macchina
 	
