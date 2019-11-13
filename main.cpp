@@ -14,6 +14,7 @@
 #include "motorbike.h"
 #include "tabellone.h"
 #include "streetlamp.h"
+#include "barile.h"
 
 #define CAMERA_BACK_CAR 0
 #define CAMERA_TOP_FIXED 1
@@ -36,6 +37,7 @@ float lightPosition[4] = {0,20,2,  1}; // ultima comp=0 => luce direzionale
 Motorbike motorbike; // la nostra moto
 Tabellone tabellone;
 Streetlamp streetlamp;
+Barile barile;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
 
@@ -475,6 +477,8 @@ void rendering(SDL_Window *win){
   //drawPista(); // disegna la pista
   tabellone.DrawTabellone(); //disegna il tabellone
   streetlamp.DrawStreetlamp(0, 0, -10);
+  barile.DrawBarile(-100, +5.3, -100);
+  barile.DrawBarile(-120, +5.3, -100);
   
   motorbike.Render(); // disegna la macchina
 	
@@ -558,6 +562,7 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
   if (!LoadTexture(2,(char *)"textures/sky_ok.jpg")) return -1;
   if (!LoadTexture(3, (char *) "textures/roadTS3.jpg")) return 0;
   if (!LoadTexture(4, (char *) "textures/me.jpg")) return 0;
+  if (!LoadTexture(5, (char *) "textures/rust.jpg")) return 0;
  
   bool done=0;
   while (!done) {

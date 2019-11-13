@@ -282,6 +282,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
   glScalef(-0.15,0.15,-0.15); // patch: riscaliamo la mesh di 1/10
   glTranslatef(0.0,2.5,0.0); //transalte the veicle up the floor
   if (usecolor) glColor3f(0.5,0.5,0.5);
+  glDisable(GL_TEXTURE_2D);
   pilot.RenderNxV();
   if (!useEnvmap)
   {
