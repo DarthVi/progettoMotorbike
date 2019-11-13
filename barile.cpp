@@ -91,6 +91,7 @@ void drawBarile(float posx, float posy, float posz, bool shadow)
         }
     }
     barileMesh.RenderNxV();
+    glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     glPopMatrix();

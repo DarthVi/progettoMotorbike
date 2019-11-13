@@ -15,6 +15,7 @@
 #include "tabellone.h"
 #include "streetlamp.h"
 #include "barile.h"
+#include "pumpstation.h"
 
 #define CAMERA_BACK_CAR 0
 #define CAMERA_TOP_FIXED 1
@@ -38,6 +39,7 @@ Motorbike motorbike; // la nostra moto
 Tabellone tabellone;
 Streetlamp streetlamp;
 Barile barile;
+Pumpstation pumpstation;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
 
@@ -479,6 +481,7 @@ void rendering(SDL_Window *win){
   streetlamp.DrawStreetlamp(0, 0, -10);
   barile.DrawBarile(-100, +5.3, -100);
   barile.DrawBarile(-120, +5.3, -100);
+  pumpstation.DrawPumpstation(0,+0.25,-3.8);
   
   motorbike.Render(); // disegna la macchina
 	
