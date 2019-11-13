@@ -24,8 +24,8 @@ extern bool useShadow;
 extern float lightPosition[];
 extern bool useWireframe;
 
-Mesh tabelloneStruct((char *) "tabelloneStruct.obj");
-Mesh tabellonePanel((char *) "tabellonePanel.obj");
+Mesh tabelloneStruct((char *) "meshes/tabelloneStruct.obj");
+Mesh tabellonePanel((char *) "meshes/tabellonePanel.obj");
 
 void Tabellone::Init()
 {

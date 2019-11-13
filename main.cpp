@@ -553,11 +553,11 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
                                     // rasterizzazione poligoni
   glPolygonOffset(1,1);             // indietro di 1
   
-  if (!LoadTexture(0,(char *)"logo.jpg")) return 0;
-  if (!LoadTexture(1,(char *)"envmap_flipped.jpg")) return 0;
-  if (!LoadTexture(2,(char *)"sky_ok.jpg")) return -1;
-  if (!LoadTexture(3, (char *) "roadTS3.jpg")) return 0;
-  if (!LoadTexture(4, (char *) "me.jpg")) return 0;
+  if (!LoadTexture(0,(char *)"textures/logo.jpg")) return 0;
+  if (!LoadTexture(1,(char *)"textures/envmap_flipped.jpg")) return 0;
+  if (!LoadTexture(2,(char *)"textures/sky_ok.jpg")) return -1;
+  if (!LoadTexture(3, (char *) "textures/roadTS3.jpg")) return 0;
+  if (!LoadTexture(4, (char *) "textures/me.jpg")) return 0;
  
   bool done=0;
   while (!done) {

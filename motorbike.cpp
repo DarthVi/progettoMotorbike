@@ -18,13 +18,13 @@
 #include "mesh.h"
 
 // var globale di tipo mesh
-Mesh carlinga((char *)"hayabusa_carlinga.obj"); // chiama il costruttore
-Mesh wheelFR1((char *)"hayabusa_frontWheel.obj");
-Mesh wheelBR1((char *)"hayabusa_backWheel.obj");
-Mesh wheelFR2((char *)"hayabusa_frontWheel_metal.obj");
-Mesh wheelBR2((char *)"hayabusa_backWheel_metal.obj");
-Mesh pilot((char *) "hayabusa_pilot.obj");
-Mesh pista((char *)"pista.obj");
+Mesh carlinga((char *)"meshes/hayabusa_carlinga.obj"); // chiama il costruttore
+Mesh wheelFR1((char *)"meshes/hayabusa_frontWheel.obj");
+Mesh wheelBR1((char *)"meshes/hayabusa_backWheel.obj");
+Mesh wheelFR2((char *)"meshes/hayabusa_frontWheel_metal.obj");
+Mesh wheelBR2((char *)"meshes/hayabusa_backWheel_metal.obj");
+Mesh pilot((char *) "meshes/hayabusa_pilot.obj");
+Mesh pista((char *)"meshes/pista.obj");
 
 extern bool useEnvmap; // var globale esterna: per usare l'evnrionment mapping
 extern bool useHeadlight; // var globale esterna: per usare i fari
