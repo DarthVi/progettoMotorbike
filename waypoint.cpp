@@ -68,8 +68,8 @@ void Waypoint::Render(float px, float py, float pz)
     drawWaypoint();
     glPopMatrix();
     // se la moto passa attraverso il waypoint
-    if (px >= pos_x - 4 && px <= pos_x + 4 && py >= pos_y - 4 && py <= pos_y + 4
-        && pz >= pos_z - 4 && pz <= pos_z + 4)
+    if (px >= pos_x - 1 && px <= pos_x + 1 && py >= pos_y - 1 && py <= pos_y + 1
+        && pz >= pos_z - 1 && pz <= pos_z + 1)
     {
         punteggio++;
         respawn = true;
