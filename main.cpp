@@ -482,6 +482,7 @@ void rendering(SDL_Window *win){
   barile.DrawBarile(-100, +5.3, -100);
   barile.DrawBarile(-120, +5.3, -100);
   pumpstation.DrawPumpstation(0,+0.25,-3.8);
+  barile.DrawBarile(-10, +5.3, -115);
   
   motorbike.Render(); // disegna la macchina
 	

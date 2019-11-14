@@ -389,7 +389,7 @@ void Motorbike::Render() const{
   {
     glColor3f(0.15,0.15,0.15); // colore fisso
     glTranslatef(0,0.01,0); // alzo l'ombra di un epsilon per evitare z-fighting con il pavimento
-    glScalef(1.01,0,1.01);  // appiattisco sulla Y, ingrandisco dell'1% sulla Z e sulla X 
+    glScalef(1.01,0,1.01);  // appiattisco sulla Y, ingrandisco dell'1% sulla Z e sulla X
     glDisable(GL_LIGHTING); // niente lighing per l'ombra
     RenderAllParts(false);  // disegno la macchina appiattita
 
