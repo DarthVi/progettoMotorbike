@@ -16,6 +16,7 @@
 #include "streetlamp.h"
 #include "barile.h"
 #include "pumpstation.h"
+#include "waypoint.h"
 
 #define CAMERA_BACK_CAR 0
 #define CAMERA_TOP_FIXED 1
@@ -34,12 +35,14 @@ bool useShadow=true;
 int cameraType=0;
 // setto la posizione luce
 float lightPosition[4] = {0,20,2,  1}; // ultima comp=0 => luce direzionale
+int punteggio = 0;
 
 Motorbike motorbike; // la nostra moto
 Tabellone tabellone;
 Streetlamp streetlamp;
 Barile barile;
 Pumpstation pumpstation;
+Waypoint waypoint;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
 
@@ -419,6 +422,13 @@ int H = 100;
 
 }
 
+void DrawWaypointLocation(float px, float py, float pz)
+{
+    waypoint.RespawnWaypoint();
+    waypoint.Render(px, py, pz);
+    waypoint.isDrawn = true;
+}
+
 /* Esegue il Rendering della scena */
 void rendering(SDL_Window *win){
   
@@ -483,6 +493,8 @@ void rendering(SDL_Window *win){
   barile.DrawBarile(-120, +5.3, -100);
   pumpstation.DrawPumpstation(0,+0.25,-3.8);
   barile.DrawBarile(-10, +5.3, -115);
+
+  DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
   
   motorbike.Render(); // disegna la macchina
 	
@@ -567,6 +579,7 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
   if (!LoadTexture(3, (char *) "textures/roadTS3.jpg")) return 0;
   if (!LoadTexture(4, (char *) "textures/me.jpg")) return 0;
   if (!LoadTexture(5, (char *) "textures/rust.jpg")) return 0;
+  if (!LoadTexture(6, (char *) "textures/marble.jpg")) return 0;
  
   bool done=0;
   while (!done) {

@@ -4,8 +4,8 @@ CPP  = g++
 CC   = gcc
 BIN  = progettoCar4
 
-OBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o
-LINKOBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o
+OBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o waypoint.o
+LINKOBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o waypoint.o
 
 # Library linking
 OS := $(shell uname)
@@ -61,6 +61,9 @@ barile.o: barile.cpp
 
 pumpstation.o: pumpstation.cpp
 	$(CPP) -c $(FRMPATH) pumpstation.cpp -o pumpstation.o
+
+waypoint.o: waypoint.cpp
+	$(CPP) -c $(FRMPATH) waypoint.cpp -o waypoint.o
 
 mesh.o: mesh.cpp
 	$(CPP) -c $(FRMPATH) mesh.cpp -o mesh.o
