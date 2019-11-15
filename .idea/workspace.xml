@@ -13,20 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5a7eb923-0393-42c4-b288-01e9664208f5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progettoCar4.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/progettoCar4.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/progettoCar4.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/progettoCar4" beforeDir="false" afterPath="$PROJECT_DIR$/progettoCar4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/waypoint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/waypoint.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/waypoint.h" beforeDir="false" afterPath="$PROJECT_DIR$/waypoint.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/waypoint.o" beforeDir="false" afterPath="$PROJECT_DIR$/waypoint.o" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1573474057605</updated>
       <workItem from="1573474060210" duration="48654000" />
-      <workItem from="1573809067005" duration="2847000" />
+      <workItem from="1573809067005" duration="8704000" />
     </task>
     <servers />
   </component>

@@ -23,7 +23,8 @@
 #define CAMERA_TOP_CAR 2
 #define CAMERA_PILOT 3
 #define CAMERA_MOUSE 4
-#define CAMERA_TYPE_MAX 5
+#define CAMERA_FOLLOW 5
+#define CAMERA_TYPE_MAX 6
 
 float viewAlpha=20, viewBeta=40; // angoli che definiscono la vista
 float eyeDist=5.0; // distanza dell'occhio dall'origine
@@ -373,6 +374,10 @@ void setCamera(){
                 glTranslatef(0,0,-eyeDist);
                 glRotatef(viewBeta,  1,0,0);
                 glRotatef(viewAlpha, 0,1,0);
+                break;
+        case CAMERA_FOLLOW:
+            gluLookAt(motorbike.px+3, motorbike.py+3, motorbike.pz+3, motorbike.px, motorbike.py, motorbike.pz, 0.0, 1.0, 0.0);
+            break;
 /*
 printf("%f %f %f\n",viewAlpha,viewBeta,eyeDist);
                 ex=eyeDist*cos(viewAlpha)*sin(viewBeta);
@@ -427,6 +432,53 @@ void DrawWaypointLocation(float px, float py, float pz)
     waypoint.RespawnWaypoint();
     waypoint.Render(px, py, pz);
     waypoint.isDrawn = true;
+}
+
+void drawMinimap()
+{
+    float moto_px, moto_pz, waypoint_px, waypoint_pz;
+
+    //calcolo le coordinate degli oggetti sulla minimappa
+    moto_px = ((50 * motorbike.px) / 67) + 50 + 20;
+    moto_pz = ((50 * motorbike.pz) / 67) + 50 + scrH - 120;
+    //printf("%f\n", moto_pz);
+    waypoint_px = ((50 * waypoint.pos_x) / 67) + 50 + 20;
+    waypoint_pz = ((50 * waypoint.pos_z) / 67) + 50 + scrH - 120;
+
+    /* disegno la minimappa */
+    glColor3ub(255, 255, 255);
+    glBegin(GL_POLYGON);
+    glVertex2d(20, scrH - 120);
+    glVertex2d(20, scrH - 20);
+    glVertex2d(120, scrH - 20);
+    glVertex2d(120, scrH - 120);
+    glEnd();
+    /* disegno la cornice */
+    glColor3ub(0, 0, 0);
+    glBegin(GL_LINE_LOOP);
+    glVertex2d(20, scrH - 120);
+    glVertex2d(20, scrH - 20);
+    glVertex2d(120, scrH - 20);
+    glVertex2d(120, scrH - 120);
+    glEnd();
+
+    /* disegna l'indicatore della moto in verde */
+    glColor3ub(0, 255, 0);
+    glBegin(GL_QUADS);
+    glVertex2d(moto_px, moto_pz + 3);
+    glVertex2d(moto_px + 3, moto_pz);
+    glVertex2d(moto_px, moto_pz - 3);
+    glVertex2d(moto_px - 3, moto_pz);
+    glEnd();
+
+    /* disegno il waypoint sulla minimappa in rosso*/
+    glColor3ub(255, 0, 0);
+    glBegin(GL_QUADS);
+    glVertex2d(waypoint_px, waypoint_pz + 3);
+    glVertex2d(waypoint_px + 3, waypoint_pz);
+    glVertex2d(waypoint_px, waypoint_pz - 3);
+    glVertex2d(waypoint_px - 3, waypoint_pz);
+    glEnd();
 }
 
 /* Esegue il Rendering della scena */
@@ -517,6 +569,13 @@ void rendering(SDL_Window *win){
   glVertex2d(0,y);
   glVertex2d(0,0);
   glEnd();
+
+  glLineWidth(1);
+  //disegna la minimap in basso a destra
+  glPushMatrix();
+  glTranslatef(+scrW-150, -scrH+150, 0);
+  drawMinimap();
+  glPopMatrix();
   
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
