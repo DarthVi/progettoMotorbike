@@ -123,33 +123,6 @@ progettoCar4/fast:
 	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/build
 .PHONY : progettoCar4/fast
 
-car.o: car.cpp.o
-
-.PHONY : car.o
-
-# target to build an object file
-car.cpp.o:
-	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/car.cpp.o
-.PHONY : car.cpp.o
-
-car.i: car.cpp.i
-
-.PHONY : car.i
-
-# target to preprocess a source file
-car.cpp.i:
-	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/car.cpp.i
-.PHONY : car.cpp.i
-
-car.s: car.cpp.s
-
-.PHONY : car.s
-
-# target to generate assembly for a file
-car.cpp.s:
-	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/car.cpp.s
-.PHONY : car.cpp.s
-
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -204,6 +177,33 @@ mesh.cpp.s:
 	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/mesh.cpp.s
 .PHONY : mesh.cpp.s
 
+motorbike.o: motorbike.cpp.o
+
+.PHONY : motorbike.o
+
+# target to build an object file
+motorbike.cpp.o:
+	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/motorbike.cpp.o
+.PHONY : motorbike.cpp.o
+
+motorbike.i: motorbike.cpp.i
+
+.PHONY : motorbike.i
+
+# target to preprocess a source file
+motorbike.cpp.i:
+	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/motorbike.cpp.i
+.PHONY : motorbike.cpp.i
+
+motorbike.s: motorbike.cpp.s
+
+.PHONY : motorbike.s
+
+# target to generate assembly for a file
+motorbike.cpp.s:
+	$(MAKE) -f CMakeFiles/progettoCar4.dir/build.make CMakeFiles/progettoCar4.dir/motorbike.cpp.s
+.PHONY : motorbike.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... progettoCar4"
 	@echo "... edit_cache"
-	@echo "... car.o"
-	@echo "... car.i"
-	@echo "... car.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
 	@echo "... mesh.o"
 	@echo "... mesh.i"
 	@echo "... mesh.s"
+	@echo "... motorbike.o"
+	@echo "... motorbike.i"
+	@echo "... motorbike.s"
 .PHONY : help
 
 

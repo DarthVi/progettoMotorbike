@@ -8,6 +8,7 @@ public:
     int pos_x, pos_y, pos_z;
     bool respawn;
     bool isDrawn;
+    int rotation;
 
     void Render(float px, float py, float pz);
     void RespawnWaypoint();

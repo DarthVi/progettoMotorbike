@@ -57,18 +57,18 @@ include CMakeFiles/progettoCar4.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/progettoCar4.dir/flags.make
 
-CMakeFiles/progettoCar4.dir/car.cpp.o: CMakeFiles/progettoCar4.dir/flags.make
-CMakeFiles/progettoCar4.dir/car.cpp.o: ../car.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vincenzo/progetto_car/progettoCar4/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/progettoCar4.dir/car.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/progettoCar4.dir/car.cpp.o -c /home/vincenzo/progetto_car/progettoCar4/car.cpp
+CMakeFiles/progettoCar4.dir/motorbike.cpp.o: CMakeFiles/progettoCar4.dir/flags.make
+CMakeFiles/progettoCar4.dir/motorbike.cpp.o: ../motorbike.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vincenzo/progetto_car/progettoCar4/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/progettoCar4.dir/motorbike.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/progettoCar4.dir/motorbike.cpp.o -c /home/vincenzo/progetto_car/progettoCar4/motorbike.cpp
 
-CMakeFiles/progettoCar4.dir/car.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/progettoCar4.dir/car.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vincenzo/progetto_car/progettoCar4/car.cpp > CMakeFiles/progettoCar4.dir/car.cpp.i
+CMakeFiles/progettoCar4.dir/motorbike.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/progettoCar4.dir/motorbike.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vincenzo/progetto_car/progettoCar4/motorbike.cpp > CMakeFiles/progettoCar4.dir/motorbike.cpp.i
 
-CMakeFiles/progettoCar4.dir/car.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/progettoCar4.dir/car.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vincenzo/progetto_car/progettoCar4/car.cpp -o CMakeFiles/progettoCar4.dir/car.cpp.s
+CMakeFiles/progettoCar4.dir/motorbike.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/progettoCar4.dir/motorbike.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vincenzo/progetto_car/progettoCar4/motorbike.cpp -o CMakeFiles/progettoCar4.dir/motorbike.cpp.s
 
 CMakeFiles/progettoCar4.dir/main.cpp.o: CMakeFiles/progettoCar4.dir/flags.make
 CMakeFiles/progettoCar4.dir/main.cpp.o: ../main.cpp
@@ -98,14 +98,14 @@ CMakeFiles/progettoCar4.dir/mesh.cpp.s: cmake_force
 
 # Object files for target progettoCar4
 progettoCar4_OBJECTS = \
-"CMakeFiles/progettoCar4.dir/car.cpp.o" \
+"CMakeFiles/progettoCar4.dir/motorbike.cpp.o" \
 "CMakeFiles/progettoCar4.dir/main.cpp.o" \
 "CMakeFiles/progettoCar4.dir/mesh.cpp.o"
 
 # External object files for target progettoCar4
 progettoCar4_EXTERNAL_OBJECTS =
 
-progettoCar4: CMakeFiles/progettoCar4.dir/car.cpp.o
+progettoCar4: CMakeFiles/progettoCar4.dir/motorbike.cpp.o
 progettoCar4: CMakeFiles/progettoCar4.dir/main.cpp.o
 progettoCar4: CMakeFiles/progettoCar4.dir/mesh.cpp.o
 progettoCar4: CMakeFiles/progettoCar4.dir/build.make

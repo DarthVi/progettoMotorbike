@@ -30,6 +30,7 @@ void Waypoint::RespawnWaypoint()
         pos_x = (rand() % 59 + 1) - 30;
         pos_y = 0;
         pos_z = (rand() % 59 + 1) - 30;
+        rotation = rand() % 360;
         respawn = false;
     }
 }
@@ -52,9 +53,21 @@ void Waypoint::drawWaypoint()
     }
     //Imposto la posizione generata ed una piccola rotazione
     glTranslatef(pos_x, pos_y, pos_z);
-    //glRotatef(45, 1, 1, 0);
-    gluQuadricDrawStyle(quadric, GLU_FILL);		//Disegna un disco pieno
-    gluDisk(quadric, 1.5, 2, 36, 36);
+    //srand(time(0));
+    glRotatef(rotation, 0, 1, 0);
+    gluQuadricDrawStyle(quadric, GLU_FILL);		//Disegna un poligono pieno
+
+    //disegno due cilindri concentrici e due dischi agli estremi dei cilindri
+    //in modo da creare un arco con spessore
+    gluCylinder(quadric, 2, 2, 0.5, 36, 36);
+    gluCylinder(quadric, 2.5, 2.5, 0.5, 36, 36);
+    glPushMatrix();
+        glTranslatef(0, 0, 0.5);
+        gluDisk(quadric, 2, 2.5, 36, 36);
+        glTranslatef(0, 0, -0.5);
+        gluDisk(quadric, 2, 2.5, 36, 36);
+    glPopMatrix();
+    //gluDisk(quadric, 1.5, 2, 36, 36);
 
     gluDeleteQuadric(quadric);
 

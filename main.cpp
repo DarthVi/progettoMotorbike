@@ -580,6 +580,7 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
   if (!LoadTexture(4, (char *) "textures/me.jpg")) return 0;
   if (!LoadTexture(5, (char *) "textures/rust.jpg")) return 0;
   if (!LoadTexture(6, (char *) "textures/marble.jpg")) return 0;
+  if (!LoadTexture(7, (char *) "textures/gold.jpg")) return 0;
  
   bool done=0;
   while (!done) {

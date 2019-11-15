@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/progettoCar4.dir/car.cpp.o"
   "CMakeFiles/progettoCar4.dir/main.cpp.o"
   "CMakeFiles/progettoCar4.dir/mesh.cpp.o"
+  "CMakeFiles/progettoCar4.dir/motorbike.cpp.o"
   "progettoCar4"
   "progettoCar4.pdb"
 )

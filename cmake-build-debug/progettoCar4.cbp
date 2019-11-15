@@ -85,12 +85,6 @@
 		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/Makefile">
 			<Option target="progettoCar4"/>
 		</Unit>
-		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/car.cpp">
-			<Option target="progettoCar4"/>
-		</Unit>
-		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/car.h">
-			<Option target="progettoCar4"/>
-		</Unit>
 		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/main.cpp">
 			<Option target="progettoCar4"/>
 		</Unit>
@@ -98,6 +92,12 @@
 			<Option target="progettoCar4"/>
 		</Unit>
 		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/mesh.h">
+			<Option target="progettoCar4"/>
+		</Unit>
+		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/motorbike.cpp">
+			<Option target="progettoCar4"/>
+		</Unit>
+		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/motorbike.h">
 			<Option target="progettoCar4"/>
 		</Unit>
 		<Unit filename="/home/vincenzo/progetto_car/progettoCar4/point3.h">
