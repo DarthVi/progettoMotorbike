@@ -28,6 +28,9 @@
 #define CAMERA_FOLLOW 5
 #define CAMERA_TYPE_MAX 6
 
+#define PI 3.14159265
+
+
 float viewAlpha=20, viewBeta=40; // angoli che definiscono la vista
 float eyeDist=5.0; // distanza dell'occhio dall'origine
 int scrH=750, scrW=750; // altezza e larghezza viewport (in pixels)
@@ -40,6 +43,7 @@ bool simpleMinimap = true;
 // setto la posizione luce
 float lightPosition[4] = {0,20,2,  1}; // ultima comp=0 => luce direzionale
 int punteggio = 0;
+int radarRadius = 10;
 
 Motorbike motorbike; // la nostra moto
 Tabellone tabellone;
@@ -674,13 +678,13 @@ void rendering(SDL_Window *win, TTF_Font *font){
   char str[10];
   sprintf(str, "%d", punteggio);
   char text[] = "Punti: ";
-  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)210, (char)210, (char)210, (char)255, strcat(text, str),
+  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text, str),
                 scrW - 200, scrH - 50, shaded);
 
 
   sprintf(str, "%d", (int)fps);
   char text2[] = "FPS: ";
-  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)210, (char)210, (char)210, (char)255, strcat(text2, str),
+  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text2, str),
                     scrW -700, scrH - 50, shaded);
 
   glEnable(GL_DEPTH_TEST);
