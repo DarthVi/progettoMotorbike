@@ -532,11 +532,11 @@ void drawMinimap()
     float moto_px, moto_pz, waypoint_px, waypoint_pz;
 
     //calcolo le coordinate degli oggetti sulla minimappa
-    moto_px = ((50 * motorbike.px) / 67) + 50 + 20;
-    moto_pz = ((50 * motorbike.pz) / 67) + 50 + scrH - 120;
+    moto_px = (0.7463f * motorbike.px) + 70;
+    moto_pz = (0.7463f * motorbike.pz) + 50 + scrH - 120;
     //printf("%f\n", moto_pz);
-    waypoint_px = ((50 * waypoint.pos_x) / 67) + 50 + 20;
-    waypoint_pz = ((50 * waypoint.pos_z) / 67) + 50 + scrH - 120;
+    waypoint_px = (0.7463f * waypoint.pos_x) + 70;
+    waypoint_pz = (0.7463f * waypoint.pos_z) + 50 + scrH - 120;
 
     /* disegno la minimappa */
     glColor3ub(255, 255, 255);
