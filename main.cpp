@@ -36,6 +36,7 @@ bool useEnvmap=true;
 bool useHeadlight=false;
 bool useShadow=true;
 int cameraType=0;
+bool simpleMinimap = true;
 // setto la posizione luce
 float lightPosition[4] = {0,20,2,  1}; // ultima comp=0 => luce direzionale
 int punteggio = 0;
@@ -541,18 +542,18 @@ void drawMinimap()
     /* disegno la minimappa */
     glColor3ub(255, 255, 255);
     glBegin(GL_POLYGON);
-    glVertex2d(20, scrH - 120);
-    glVertex2d(20, scrH - 20);
-    glVertex2d(120, scrH - 20);
-    glVertex2d(120, scrH - 120);
+    glVertex2d(1.25, scrH - 135);
+    glVertex2d(1.25, scrH - 1.25);
+    glVertex2d(135, scrH - 1.25);
+    glVertex2d(135, scrH - 135);
     glEnd();
     /* disegno la cornice */
     glColor3ub(0, 0, 0);
     glBegin(GL_LINE_LOOP);
-    glVertex2d(20, scrH - 120);
-    glVertex2d(20, scrH - 20);
-    glVertex2d(120, scrH - 20);
-    glVertex2d(120, scrH - 120);
+    glVertex2d(1.25, scrH - 135);
+    glVertex2d(1.25, scrH - 1.25);
+    glVertex2d(135, scrH - 1.25);
+    glVertex2d(135, scrH - 135);
     glEnd();
 
     /* disegna l'indicatore della moto in verde */
@@ -670,11 +671,17 @@ void rendering(SDL_Window *win, TTF_Font *font){
   drawMinimap();
   glPopMatrix();
 
-  char pointsStr[5];
-  sprintf(pointsStr, "%d", punteggio);
+  char str[10];
+  sprintf(str, "%d", punteggio);
   char text[] = "Punti: ";
-  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)210, (char)210, (char)210, (char)255, strcat(text, pointsStr),
+  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)210, (char)210, (char)210, (char)255, strcat(text, str),
                 scrW - 200, scrH - 50, shaded);
+
+
+  sprintf(str, "%d", (int)fps);
+  char text2[] = "FPS: ";
+  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)210, (char)210, (char)210, (char)255, strcat(text2, str),
+                    scrW -700, scrH - 50, shaded);
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
@@ -770,6 +777,7 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
         if (e.key.keysym.sym==SDLK_F3) useEnvmap=!useEnvmap;
         if (e.key.keysym.sym==SDLK_F4) useHeadlight=!useHeadlight;
         if (e.key.keysym.sym==SDLK_F5) useShadow=!useShadow;
+        if (e.key.keysym.sym==SDLK_F6) simpleMinimap=!simpleMinimap;
         break;
       case SDL_KEYUP:
         motorbike.controller.EatKey(e.key.keysym.sym, keymap , false);
