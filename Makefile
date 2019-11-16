@@ -13,20 +13,20 @@ ifeq ($(OS),Darwin)
 ## caso Mac OS
 $(info Mac OS detected)
 FRMPATH=-F /Library/Frameworks
-LIBS =  -framework OpenGL -framework SDL2 -framework SDL2_image -lm
+LIBS =  -framework OpenGL -framework SDL2 -framework SDL2_image -framework SDL2_ttf -lm
 $(info SDL2 libraries must be in: $(FRMPATH))
 else
 ifeq ($(OS),MINGW32_NT-6.1)
 ## caso Windows MinGW
 $(info Windows MinGW detected)
 FRMPATH = -IC:\MinGW\include
-LIBS = -LC:\MinGW\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lopengl32 -lglu32 -lm
+LIBS = -LC:\MinGW\lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lopengl32 -lglu32 -lm
 else
 ##caso Linux
 $(info Linux detected)
 #framework presenti solo nel caso MAC OS
 FRMPATH =
-LIBS = -lGL -lGLU -lSDL2 -lSDL2_image -lm
+LIBS = -lGL -lGLU -lSDL2 -lSDL2_image -lSDL2_ttf -lm
 endif
 endif
 

@@ -289,10 +289,13 @@ void Motorbike::RenderAllParts(bool usecolor) const{
     if (usecolor) glColor3f(1,0,0);     // colore rosso, da usare con Lighting
   }
   else {
-    if (usecolor) SetupEnvmapTexture(); 
+    if (usecolor) SetupEnvmapTexture();
   }
   carlinga.RenderNxV(); // rendering delle mesh carlinga usando normali per vertice
 
+  glDisable(GL_TEXTURE_GEN_S);
+  glDisable(GL_TEXTURE_GEN_T);
+  glDisable(GL_TEXTURE_2D);
   if (usecolor) glEnable(GL_LIGHTING);
 
     glPushMatrix();
@@ -311,7 +314,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
     if (usecolor) glColor3f(0.9,0.9,0.9);
     wheelFR2.RenderNxV();
     glPopMatrix();
-  
+
     glPushMatrix();
     glTranslate(wheelBR1.Center() );
     //glRotatef( sterzo,0,1,0);
@@ -325,45 +328,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
     if (usecolor) glColor3f(0.9,0.9,0.9);
     wheelBR2.RenderNxV();
     glPopMatrix();
-/*
-  // modo vecchio: disegno le ruote senza usare le mesh
-  // ruota posteriore D
-  glPushMatrix();
-  glTranslatef( 0.58,+raggioRuotaP-0.28,+0.8);
-  glRotatef(mozzoP,1,0,0);
-  // SONO NELLO SPAZIO RUOTA
-  glScalef(0.1, raggioRuotaP, raggioRuotaP);
-  drawWheel();
-  glPopMatrix();
-  
-  // ruota posteriore S
-  glPushMatrix();
-  glTranslatef(-0.58,+raggioRuotaP-0.28,+0.8);
-  glRotatef(mozzoP,1,0,0);
-  glScalef(0.1, raggioRuotaP, raggioRuotaP);
-  drawWheel();
-  glPopMatrix();
- 
-  // ruota anteriore D
-  glPushMatrix();
-  glTranslatef( 0.58,+raggioRuotaA-0.28,-0.55);
-  glRotatef(sterzo,0,1,0);
-  glRotatef(mozzoA,1,0,0);
-  glScalef(0.08, raggioRuotaA, raggioRuotaA);
-  drawWheel();
-  glPopMatrix();
-  
-  // ruota anteriore S
-  glPushMatrix();
-  glTranslatef(-0.58,+raggioRuotaA-0.28,-0.55);
-  glRotatef(sterzo,0,1,0);
-  glRotatef(mozzoA,1,0,0);
-  drawAxis();
-  glScalef(0.08, raggioRuotaA, raggioRuotaA);
-  drawWheel();
-  glPopMatrix(); 
-  */
-  
+
   glPopMatrix(); 
 }
  
@@ -382,7 +347,7 @@ void Motorbike::Render() const{
   
   DrawHeadlight(0,0,-1, 0, useHeadlight); // accendi faro sinistro
 
-  RenderAllParts(true); 
+  RenderAllParts(true);
   
   // ombra!
   if(useShadow)
