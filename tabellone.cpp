@@ -65,7 +65,7 @@ void drawTabellone(bool shadow)
         glColor3f(1, 1, 1);
         if (!useWireframe)
         {
-            glBindTexture(GL_TEXTURE_2D, 4);
+            glBindTexture(GL_TEXTURE_2D, MYPHOTO);
             glEnable(GL_TEXTURE_2D);
             glDisable(GL_TEXTURE_GEN_S);
             glDisable(GL_TEXTURE_GEN_T);

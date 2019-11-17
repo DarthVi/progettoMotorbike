@@ -13,6 +13,7 @@
 #include <GL/glu.h>
 #endif
 
+#include "utils.h"
 #include "motorbike.h"
 #include "tabellone.h"
 #include "streetlamp.h"
@@ -364,7 +365,7 @@ void drawFloor()
   if(!useWireframe)
   {
       // disegno il terreno ripetendo una texture su di esso
-      glBindTexture(GL_TEXTURE_2D, 3);
+      glBindTexture(GL_TEXTURE_2D, ROAD);
       glEnable(GL_TEXTURE_2D);
       //disabilito la gen. automatica di coord. texture
       glDisable(GL_TEXTURE_GEN_S);
@@ -505,7 +506,7 @@ int H = 100;
   }
   else
   {
-        glBindTexture(GL_TEXTURE_2D,2);
+        glBindTexture(GL_TEXTURE_2D,SKY);
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_TEXTURE_GEN_S);
         glEnable(GL_TEXTURE_GEN_T);
@@ -773,14 +774,14 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
                                     // rasterizzazione poligoni
   glPolygonOffset(1,1);             // indietro di 1
   
-  if (!LoadTexture(0,(char *)"textures/logo.jpg")) return 0;
-  if (!LoadTexture(1,(char *)"textures/envmap_flipped.jpg")) return 0;
-  if (!LoadTexture(2,(char *)"textures/sky_ok.jpg")) return -1;
-  if (!LoadTexture(3, (char *) "textures/roadTS3.jpg")) return 0;
-  if (!LoadTexture(4, (char *) "textures/me.jpg")) return 0;
-  if (!LoadTexture(5, (char *) "textures/rust.jpg")) return 0;
-  if (!LoadTexture(6, (char *) "textures/marble.jpg")) return 0;
-  if (!LoadTexture(7, (char *) "textures/gold.jpg")) return 0;
+  if (!LoadTexture(LOGO,(char *)"textures/logo.jpg")) return 0;
+  if (!LoadTexture(ENVMAPCARLINGA,(char *)"textures/envmap_flipped.jpg")) return 0;
+  if (!LoadTexture(SKY,(char *)"textures/sky_ok.jpg")) return -1;
+  if (!LoadTexture(ROAD, (char *) "textures/roadTS3.jpg")) return 0;
+  if (!LoadTexture(MYPHOTO, (char *) "textures/me.jpg")) return 0;
+  if (!LoadTexture(RUST, (char *) "textures/rust.jpg")) return 0;
+  if (!LoadTexture(MARBLE, (char *) "textures/marble.jpg")) return 0;
+  if (!LoadTexture(GOLD, (char *) "textures/gold.jpg")) return 0;
  
   bool done=0;
   while (!done) {

@@ -16,6 +16,7 @@
 #include "motorbike.h"
 #include "point3.h"
 #include "mesh.h"
+#include "utils.h"
 
 // var globale di tipo mesh
 Mesh carlinga((char *)"meshes/hayabusa_carlinga.obj"); // chiama il costruttore
@@ -48,7 +49,7 @@ void Controller::Joy(int keymap, bool pressed_or_released)
 void SetupEnvmapTexture()
 {
   // facciamo binding con la texture 1
-  glBindTexture(GL_TEXTURE_2D,1);
+  glBindTexture(GL_TEXTURE_2D,ENVMAPCARLINGA);
    
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
@@ -63,7 +64,7 @@ void SetupEnvmapTexture()
 // Mappo l'intervallo [ minY , maxY ] nell'intervallo delle T [0..1]
 //     e l'intervallo [ minZ , maxZ ] nell'intervallo delle S [0..1]
 void SetupWheelTexture(Point3 min, Point3 max){
-  glBindTexture(GL_TEXTURE_2D,0);
+  glBindTexture(GL_TEXTURE_2D,LOGO);
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_TEXTURE_GEN_S);
   glEnable(GL_TEXTURE_GEN_T);

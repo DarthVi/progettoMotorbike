@@ -45,7 +45,7 @@ void Waypoint::drawWaypoint(bool shadow)
     if (!useWireframe && !shadow)
     {
         glColor3f(0, 0, 0.8);
-        glBindTexture(GL_TEXTURE_2D, 6);
+        glBindTexture(GL_TEXTURE_2D, MARBLE);
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_TEXTURE_GEN_S);
         glDisable(GL_TEXTURE_GEN_T);

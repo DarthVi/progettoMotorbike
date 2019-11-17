@@ -59,7 +59,7 @@ void drawBarile(float posx, float posy, float posz, bool shadow)
         glColor3f(1, 1, 1);
         if (!useWireframe)
         {
-            glBindTexture(GL_TEXTURE_2D,5);
+            glBindTexture(GL_TEXTURE_2D,RUST);
 
             glEnable(GL_TEXTURE_2D);
             glEnable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
