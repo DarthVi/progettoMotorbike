@@ -21,6 +21,8 @@
 
 extern int punteggio;
 extern bool useWireframe;
+extern float lightPosition[];
+extern bool useShadow;
 
 void Waypoint::RespawnWaypoint()
 {
@@ -35,15 +37,15 @@ void Waypoint::RespawnWaypoint()
     }
 }
 
-void Waypoint::drawWaypoint()
+void Waypoint::drawWaypoint(bool shadow)
 {
     glPushMatrix();
     GLUquadricObj *quadric;
     quadric = gluNewQuadric();
-    if (!useWireframe)
+    if (!useWireframe && !shadow)
     {
         glColor3f(0, 0, 0.8);
-        glBindTexture(GL_TEXTURE_2D, 6); //Texture da applicare alla sfera
+        glBindTexture(GL_TEXTURE_2D, 6);
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_TEXTURE_GEN_S);
         glDisable(GL_TEXTURE_GEN_T);
@@ -78,7 +80,19 @@ void Waypoint::drawWaypoint()
 void Waypoint::Render(float px, float py, float pz)
 {
     glPushMatrix();
-    drawWaypoint();
+    drawWaypoint(false);
+
+//    if(useShadow)
+//    {
+//        glPushMatrix();
+//        glColor3f(0.2, 0.2, 0.2);
+//        glShadowProjection(lightPosition, e, n);
+//        glDisable(GL_LIGHTING);
+//        drawWaypoint(true);
+//        glEnable(GL_LIGHTING);
+//        glPopMatrix();
+//    }
+
     glPopMatrix();
     // se la moto passa attraverso il waypoint
     if (px >= pos_x - 1 && px <= pos_x + 1 && py >= pos_y - 1 && py <= pos_y + 1

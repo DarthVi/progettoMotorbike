@@ -26,16 +26,6 @@ void drawBarile(float posx, float posy, float posz, bool shadow);
 
 Mesh barileMesh((char *) "meshes/Gasoline_barrel.obj");
 
-void Barile::Init()
-{
-    e[0] = 0;
-    e[1] = 0.02;
-    e[2] = 0;
-    n[0] = 0;
-    n[1] = -1;
-    n[2] = 0;
-}
-
 void Barile::DrawBarile(float posx, float posy, float posz)
 {
     drawBarile(posx, posy, posz, false);

@@ -2,15 +2,11 @@
 // Created by vincenzo on 12/11/19.
 //
 
-class Streetlamp
+#include "object.h"
+
+class Streetlamp : public Object
 {
 public:
-    float e[3];
-    float n[3];
-    void Init();
-    Streetlamp()
-    {
-        Init();
-    }
+    Streetlamp() : Object() {};
     void DrawStreetlamp(float posx, float posy, float posz);
 };

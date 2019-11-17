@@ -26,17 +26,6 @@ extern bool useShadow;
 extern float lightPosition[];
 Mesh streetlampMesh((char *) "meshes/streetlamp.obj");
 
-
-void Streetlamp::Init()
-{
-    e[0] = 0;
-    e[1] = 0.02;
-    e[2] = 0;
-    n[0] = 0;
-    n[1] = -1;
-    n[2] = 0;
-}
-
 void Streetlamp::DrawStreetlamp(float posx, float posy, float posz)
 {
     drawStreetLamp(posx, posy, posz, false);

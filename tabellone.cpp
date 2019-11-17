@@ -27,16 +27,6 @@ extern bool useWireframe;
 Mesh tabelloneStruct((char *) "meshes/tabelloneStruct.obj");
 Mesh tabellonePanel((char *) "meshes/tabellonePanel.obj");
 
-void Tabellone::Init()
-{
-    e[0] = 0;
-    e[1] = 0.02;
-    e[2] = 0;
-    n[0] = 0;
-    n[1] = -1;
-    n[2] = 0;
-}
-
 void Tabellone::DrawTabellone()
 {
     drawTabellone(false);

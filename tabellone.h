@@ -2,14 +2,10 @@
 // Created by vincenzo on 12/11/19.
 //
 
-class Tabellone{
+#include "object.h"
+
+class Tabellone : public Object{
 public:
-    float e[3];
-    float n[3];
-    Tabellone()
-    {
-        Init();
-    }
-    void Init();
+    Tabellone() : Object() {};
     void DrawTabellone();
 };

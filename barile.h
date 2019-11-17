@@ -2,15 +2,11 @@
 // Created by vincenzo on 13/11/19.
 //
 
-class Barile
+#include "object.h"
+
+class Barile : public Object
 {
 public:
-    float e[3];
-    float n[3];
-    void Init();
-    Barile()
-    {
-        Init();
-    }
+    Barile() : Object() {};
     void DrawBarile(float posx, float posy, float posz);
 };

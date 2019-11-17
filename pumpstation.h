@@ -2,9 +2,11 @@
 // Created by vincenzo on 13/11/19.
 //
 
-class Pumpstation
+#include "object.h"
+
+class Pumpstation : public Object
 {
 public:
-    Pumpstation() = default;
+    Pumpstation() : Object() {};
     void DrawPumpstation(float posx, float posy, float posz);
 };
