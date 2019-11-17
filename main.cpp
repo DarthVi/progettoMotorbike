@@ -43,7 +43,7 @@ bool simpleMinimap = true;
 // setto la posizione luce
 float lightPosition[4] = {0,20,2,  1}; // ultima comp=0 => luce direzionale
 int punteggio = 0;
-int radarRadius = 10;
+int radarRadius = 100;
 
 Motorbike motorbike; // la nostra moto
 Tabellone tabellone;
@@ -543,40 +543,57 @@ void drawMinimap()
     waypoint_px = (0.7463f * waypoint.pos_x) + 70;
     waypoint_pz = (0.7463f * waypoint.pos_z) + 50 + scrH - 120;
 
-    /* disegno la minimappa */
-    glColor3ub(255, 255, 255);
-    glBegin(GL_POLYGON);
-    glVertex2d(1.25, scrH - 135);
-    glVertex2d(1.25, scrH - 1.25);
-    glVertex2d(135, scrH - 1.25);
-    glVertex2d(135, scrH - 135);
+    // disegnamo il background della mappa
+    // Use triangular segments to form a circle
+    glPushMatrix();
+    glTranslatef(+30, +720, 0);
+    glBegin(GL_TRIANGLE_FAN);
+    glColor3ub(255, 255, 255);  // White
+    glVertex2f(0.0f, 0.0f);       // Center of circle
+    int numSegments = 100;
+    GLfloat angle;
+    for (int i = 0; i <= numSegments; i++) { // Last vertex same as first vertex
+        angle = i * 2.0f * PI / numSegments;  // 360 deg for all segments
+        glVertex2f(cos(angle) * radarRadius, sin(angle) * radarRadius);
+    }
     glEnd();
-    /* disegno la cornice */
-    glColor3ub(0, 0, 0);
-    glBegin(GL_LINE_LOOP);
-    glVertex2d(1.25, scrH - 135);
-    glVertex2d(1.25, scrH - 1.25);
-    glVertex2d(135, scrH - 1.25);
-    glVertex2d(135, scrH - 135);
-    glEnd();
+    glPopMatrix();
 
+    //disegnamo la cornice della mappa
+    glPushMatrix();
+    glTranslatef(+30, +720, 0);
+    glBegin(GL_LINE_LOOP);
+    glColor3ub(0, 0, 0);  // Black
+    numSegments = 100;
+    angle;
+    for (int i = 0; i <= numSegments; i++) { // Last vertex same as first vertex
+        angle = i * 2.0f * PI / numSegments;  // 360 deg for all segments
+        glVertex2f(cos(angle) * radarRadius, sin(angle) * radarRadius);
+    }
+    glEnd();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-35,+40,0);
     /* disegna l'indicatore della moto in verde */
     glColor3ub(0, 255, 0);
-    glBegin(GL_QUADS);
-    glVertex2d(moto_px, moto_pz + 3);
-    glVertex2d(moto_px + 3, moto_pz);
-    glVertex2d(moto_px, moto_pz - 3);
-    glVertex2d(moto_px - 3, moto_pz);
+    glPointSize(5);
+    glEnable(GL_POINT_SMOOTH);
+    glBegin(GL_POINTS);
+    glVertex2d(moto_px,moto_pz);
     glEnd();
+    glDisable(GL_POINT_SMOOTH);
+
 
     /* disegno il waypoint sulla minimappa in rosso*/
     glColor3ub(255, 0, 0);
-    glBegin(GL_QUADS);
-    glVertex2d(waypoint_px, waypoint_pz + 3);
-    glVertex2d(waypoint_px + 3, waypoint_pz);
-    glVertex2d(waypoint_px, waypoint_pz - 3);
-    glVertex2d(waypoint_px - 3, waypoint_pz);
+    glPointSize(5);
+    glEnable(GL_POINT_SMOOTH);
+    glBegin(GL_POINTS);
+    glVertex2d(waypoint_px,waypoint_pz);
     glEnd();
+    glDisable(GL_POINT_SMOOTH);
+    glPopMatrix();
 }
 
 /* Esegue il Rendering della scena */
