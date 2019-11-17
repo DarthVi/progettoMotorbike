@@ -134,6 +134,16 @@ void Motorbike::DoStep(){
   px+=vx;
   py+=vy;
   pz+=vz;
+
+  //evito che la moto vada oltre lo skybox
+  if (pz >= 70)
+    pz = 70;
+  if (pz <= -70)
+    pz = -70;
+  if (px >= 70)
+    px = 70;
+  if (px <= -70)
+    px = -70;
 } 
 
 //void drawCube(); // questa e' definita altrove (quick hack)
