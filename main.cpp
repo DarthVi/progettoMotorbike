@@ -666,7 +666,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
   pumpstation.DrawPumpstation(0,+0.25,-3.8);
   barile.DrawBarile(-10, +5.3, -115);
   statua.DrawStatua(-15,+1.3,0);
-  bench.DrawBench(-1500,0,-200);
+  bench.DrawBench(-150,0,-20);
 
   DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
 

@@ -49,7 +49,7 @@ void Bench::DrawBench(float posx, float posy, float posz)
 void drawBench(float posx, float posy, float posz, bool shadow)
 {
     glPushMatrix();
-    glScalef(0.01, 0.01, 0.01);
+    glScalef(0.1, 0.1, 0.1);
 
     glPushMatrix();
     if (!shadow)
