@@ -18,6 +18,7 @@
 #include "tabellone.h"
 #include "streetlamp.h"
 #include "statua.h"
+#include "bench.h"
 #include "barile.h"
 #include "pumpstation.h"
 #include "waypoint.h"
@@ -54,6 +55,7 @@ Barile barile;
 Pumpstation pumpstation;
 Waypoint waypoint;
 Statua statua;
+Bench bench;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
 
@@ -664,6 +666,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
   pumpstation.DrawPumpstation(0,+0.25,-3.8);
   barile.DrawBarile(-10, +5.3, -115);
   statua.DrawStatua(-15,+1.3,0);
+  bench.DrawBench(-1500,0,-200);
 
   DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
 
@@ -785,6 +788,7 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
   if (!LoadTexture(RUST, (char *) "textures/rust.jpg")) return 0;
   if (!LoadTexture(MARBLE, (char *) "textures/marble.jpg")) return 0;
   if (!LoadTexture(GOLD, (char *) "textures/gold.jpg")) return 0;
+  if (!LoadTexture(WOOD, (char *) "textures/wood.jpg")) return 0;
  
   bool done=0;
   while (!done) {

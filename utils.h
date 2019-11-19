@@ -15,6 +15,7 @@ enum textures
     MYPHOTO,
     RUST,
     MARBLE,
-    GOLD
+    GOLD,
+    WOOD
 };
 #endif
