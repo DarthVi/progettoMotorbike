@@ -17,6 +17,7 @@
 #include "motorbike.h"
 #include "tabellone.h"
 #include "streetlamp.h"
+#include "statua.h"
 #include "barile.h"
 #include "pumpstation.h"
 #include "waypoint.h"
@@ -52,6 +53,7 @@ Streetlamp streetlamp;
 Barile barile;
 Pumpstation pumpstation;
 Waypoint waypoint;
+Statua statua;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
 
@@ -661,6 +663,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
   barile.DrawBarile(-120, +5.3, -100);
   pumpstation.DrawPumpstation(0,+0.25,-3.8);
   barile.DrawBarile(-10, +5.3, -115);
+  statua.DrawStatua(-15,+1.3,0);
 
   DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
 
