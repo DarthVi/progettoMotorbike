@@ -15,10 +15,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/bench.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bench.o" beforeDir="false" afterPath="$PROJECT_DIR$/bench.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/meshes/bench.obj" beforeDir="false" afterPath="$PROJECT_DIR$/meshes/bench.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/progettoCar4" beforeDir="false" afterPath="$PROJECT_DIR$/progettoCar4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/waypoint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/waypoint.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +72,7 @@
       <workItem from="1573474060210" duration="48654000" />
       <workItem from="1573809067005" duration="15816000" />
       <workItem from="1573837548012" duration="190000" />
-      <workItem from="1573841830383" duration="35806000" />
+      <workItem from="1573841830383" duration="38422000" />
     </task>
     <servers />
   </component>

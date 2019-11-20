@@ -73,10 +73,13 @@ void drawBench(float posx, float posy, float posz, bool shadow)
             glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
             float sz=1.0/(benchMesh.bbmax.Z() - benchMesh.bbmin.Z());
             float ty=1.0/(benchMesh.bbmax.Y() - benchMesh.bbmin.Y());
+            float tx=1.0 / (benchMesh.bbmax.X() - benchMesh.bbmin.X());
             float s[4]={0,0,sz,  - benchMesh.bbmin.Z()*sz };
             float t[4]={0,ty,0,  - benchMesh.bbmin.Y()*ty };
+            float x[4] = { tx, 0, 0, -benchMesh.bbmin.X() * tx };
             glTexGenfv(GL_S, GL_OBJECT_PLANE, s);
             glTexGenfv(GL_T, GL_OBJECT_PLANE, t);
+            glTexGenfv(GL_R, GL_OBJECT_PLANE, x);
             glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
             glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
 

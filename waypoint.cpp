@@ -44,7 +44,7 @@ void Waypoint::drawWaypoint(bool shadow)
     quadric = gluNewQuadric();
     if (!useWireframe && !shadow)
     {
-        glColor3f(0, 0, 0.8);
+        glColor3f(1, 1, 1);
         glBindTexture(GL_TEXTURE_2D, MARBLE);
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_TEXTURE_GEN_S);
