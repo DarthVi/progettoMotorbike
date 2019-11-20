@@ -53,7 +53,7 @@ void drawStatua(float posx, float posy, float posz, bool shadow)
 
     glPushMatrix();
     if (!shadow)
-        glColor3f(.5, .5, .5);
+        glColor3f(.7, .7, .7);
     glTranslatef(posx, posy, posz);
     glRotated(90, 0, 1, 0);
 
