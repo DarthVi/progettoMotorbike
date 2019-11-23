@@ -11,6 +11,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <ctime>
+
 #endif
 
 #include "utils.h"
@@ -32,6 +34,7 @@
 #define CAMERA_TYPE_MAX 6
 
 #define PI 3.14159265
+#define TIMEAVAILABLE 181
 
 
 float viewAlpha=20, viewBeta=40; // angoli che definiscono la vista
@@ -58,6 +61,9 @@ Statua statua;
 Bench bench;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
+double initTime;
+double currentTime;
+double finalTime;
 
 // Frames Per Seconds
 const int fpsSampling = 3000; // lunghezza intervallo di calcolo fps
@@ -711,6 +717,12 @@ void rendering(SDL_Window *win, TTF_Font *font){
   SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text2, str),
                     scrW -700, scrH - 50, shaded);
 
+  int remainingTime = TIMEAVAILABLE - (currentTime / CLOCKS_PER_SEC);
+  char text3[] = "Tempo: ";
+  sprintf(str, "%d", remainingTime);
+  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text3, str),
+                    scrW -700, scrH - 90, shaded);
+
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
   
@@ -727,6 +739,42 @@ void redraw(){
   e.type=SDL_WINDOWEVENT;
   e.window.event=SDL_WINDOWEVENT_EXPOSED;
   SDL_PushEvent(&e);
+}
+
+void endGame(SDL_Window *win, TTF_Font *font)
+{
+    glViewport(0, 0, scrW, scrH);
+
+    //colore sfondo
+    glClearColor(0,0,0,1);
+
+    // riempe tutto lo screen buffer col colore dello sfondo
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    SetCoordToPixel();
+
+    glLineWidth(1);
+
+    char points[10];
+    sprintf(points, "%d", punteggio);
+
+    char ptStr[] = "Punti totalizzati: ";
+    char gameOverMsg[] = "GAME OVER";
+    char continueMsg[] = "Premere un tasto per chiudere l'applicazione";
+
+
+    SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char) 255, (char) 255, gameOverMsg,
+                    scrW / 2 - 75,
+                    scrH / 2 + 100, shaded);
+
+    SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char) 255, (char) 255,
+                    strcat(ptStr, points), scrW / 2 - 100, scrH / 2 + 50, shaded);
+    SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char) 255, (char) 255, continueMsg,
+                    scrW / 2 -250, scrH / 2, shaded);
+    glFinish();
+
+    SDL_GL_SwapWindow(win);
+
 }
 
 int main(int argc, char* argv[])
@@ -789,8 +837,11 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
   if (!LoadTexture(MARBLE, (char *) "textures/marble.jpg")) return 0;
   if (!LoadTexture(GOLD, (char *) "textures/gold.jpg")) return 0;
   if (!LoadTexture(WOOD, (char *) "textures/wood.jpg")) return 0;
+
+  initTime = clock();
  
   bool done=0;
+  bool pressed = false;
   while (!done) {
     
     SDL_Event e;
@@ -925,9 +976,51 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
       }
       
       if (doneSomething) 
-      rendering(win, font);
+        rendering(win, font);
+
+      finalTime = clock();
+      currentTime = finalTime - initTime;
+
+      //se sono passati i secondi disponibili
+      if(currentTime / CLOCKS_PER_SEC >= TIMEAVAILABLE)
+      {
+          done = 1;
+
+          while(!pressed)
+          {
+              if (SDL_PollEvent(&e))
+              {
+                  switch (e.type)
+                  {
+                      case SDL_KEYDOWN:
+                          pressed = true;
+                          break;
+                      case SDL_WINDOWEVENT:
+                          windowID = SDL_GetWindowID(win);
+                          if (e.window.windowID == windowID)
+                          {
+                              switch (e.window.event)
+                              {
+                                  case SDL_WINDOWEVENT_SIZE_CHANGED:
+                                  {
+                                      scrW = e.window.data1;
+                                      scrH = e.window.data2;
+                                      glViewport(0, 0, scrW,
+                                                 scrH);
+                                      break;
+                                  }
+                              }
+                          }
+                  }
+              } else
+              { // disegno la schermata di fine gioco
+                  endGame(win, font);
+              }
+          }
+      }
+
       //redraw();
-      else {
+      else{
         // tempo libero!!!
       }
     }
