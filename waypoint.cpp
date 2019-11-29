@@ -29,9 +29,9 @@ void Waypoint::RespawnWaypoint()
     if(respawn)
     {
         srand(time(0));
-        pos_x = (rand() % 59 + 1) - 30;
+        pos_x = (rand() % 60 + 1) - 30;
         pos_y = 0;
-        pos_z = (rand() % 59 + 1) - 30;
+        pos_z = (rand() % 60 + 1) - 30;
         rotation = rand() % 360;
         respawn = false;
     }
