@@ -2,7 +2,7 @@
 
 CPP  = g++
 CC   = gcc
-BIN  = progettoCar4
+BIN  = progettoMotorbike
 
 OBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o waypoint.o statua.o bench.o
 LINKOBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o waypoint.o statua.o bench.o

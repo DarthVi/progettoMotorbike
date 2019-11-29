@@ -374,13 +374,12 @@ void drawFloor()
 
   if(!useWireframe)
   {
-      // disegno il terreno ripetendo una texture su di esso
+      // inizializzo la texture della strada
       glBindTexture(GL_TEXTURE_2D, ROAD);
       glEnable(GL_TEXTURE_2D);
-      //disabilito la gen. automatica di coord. texture
+
       glDisable(GL_TEXTURE_GEN_S);
       glDisable(GL_TEXTURE_GEN_T);
-      //glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
       glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
   }
   /*
@@ -396,7 +395,7 @@ void drawFloor()
   glEnd();
   */
   
-  // disegna KxK quads
+  // disegna KxK quads, ad ogni quad viene applicata la texture del terreno
   glBegin(GL_QUADS);
     glColor3f(0.6, 0.6, 0.6); // colore uguale x tutti i quads
     glNormal3f(0,1,0);       // normale verticale uguale x tutti
@@ -548,23 +547,24 @@ void drawMinimap()
     float moto_px, moto_pz, waypoint_px, waypoint_pz;
 
     //calcolo le coordinate degli oggetti sulla minimappa
-    moto_px = (0.7463f * motorbike.px) + 70;
-    moto_pz = (0.7463f * motorbike.pz) + 50 + scrH - 120;
-    //printf("%f\n", moto_pz);
-    waypoint_px = (0.7463f * waypoint.pos_x) + 70;
-    waypoint_pz = (0.7463f * waypoint.pos_z) + 50 + scrH - 120;
+    moto_px = (motorbike.px) + 70;
+    moto_pz = (motorbike.pz) + 50 + scrH - 120;
+    //printf("X: %f\n", motorbike.px);
+    //printf("Z: %f\n", motorbike.pz);
+    waypoint_px = (waypoint.pos_x) + 70;
+    waypoint_pz = (waypoint.pos_z) + 50 + scrH - 120;
 
     // disegnamo il background della mappa
-    // Use triangular segments to form a circle
+    // Uso GL_TRIANGLE_FAN per formare un cerchio
     glPushMatrix();
     glTranslatef(+30, +720, 0);
     glBegin(GL_TRIANGLE_FAN);
-    glColor3ub(255, 255, 255);  // White
-    glVertex2f(0.0f, 0.0f);       // Center of circle
+    glColor3ub(255, 255, 255);  // Bianco
+    glVertex2f(0.0f, 0.0f);       // Centro del cerchio
     int numSegments = 100;
     GLfloat angle;
-    for (int i = 0; i <= numSegments; i++) { // Last vertex same as first vertex
-        angle = i * 2.0f * PI / numSegments;  // 360 deg for all segments
+    for (int i = 0; i <= numSegments; i++) { // ultimo vertice uguale al primo vertice
+        angle = i * 2.0f * PI / numSegments;  // 360 gradi per tutti i segmenti
         glVertex2f(cos(angle) * radarRadius, sin(angle) * radarRadius);
     }
     glEnd();
