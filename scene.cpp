@@ -89,13 +89,13 @@ void Streetlamp::DrawStreetlamp(float posx, float posy, float posz)
 //        glShadowProjection(lightPosition, e, n);
 //        glDisable(GL_LIGHTING);
 //        glColor3f(0.2, 0.2, 0.2);
-//        drawStreetLamp(posx, posy, posz, true);
+//        drawStreetLampHelper(posx, posy, posz, true);
 //        glEnable(GL_LIGHTING);
 //        glPopMatrix();
 //    }
 }
 
-void Pumpstation::DrawPumpstation(float posx, float posy, float posz)
+void Pumpstation::DrawPumpstation(float posx, float posy, float posz, float lightPos[])
 {
     drawPumpstationHelper(posx, posy, posz, false);
 
@@ -103,7 +103,7 @@ void Pumpstation::DrawPumpstation(float posx, float posy, float posz)
     {
         glPushMatrix();
 
-        glShadowProjection(lightPosition, e, n);
+        glShadowProjection(lightPos, e, n);
         glDisable(GL_LIGHTING);
         glColor3f(0.2, 0.2, 0.2);
         drawPumpstationHelper(posx, posy, posz, true);

@@ -662,10 +662,10 @@ void rendering(SDL_Window *win, TTF_Font *font){
   //drawPista(); // disegna la pista
   tabellone.DrawTabellone(); //disegna il tabellone
   streetlamp.DrawStreetlamp(0, 0, -10);
+  float lampLightPosition[4] = {0, 10, -10, 1}; //posizione della luce della streetlamp
   barile.DrawBarile(-100, +5.3, -100, lightPosition);
   barile.DrawBarile(-120, +5.3, -100, lightPosition);
-  pumpstation.DrawPumpstation(0,+0.25,-3.8);
-  float lampLightPosition[4] = {0, 10, -10, 1};
+  pumpstation.DrawPumpstation(0,+0.25,-3.8, lampLightPosition);
   barile.DrawBarile(-10, +5.3, -115, lampLightPosition);
   statua.DrawStatua(-15,+1.3,0);
   bench.DrawBench(-150,0,-20);

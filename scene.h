@@ -24,7 +24,7 @@ class Pumpstation : public Object
 {
 public:
     Pumpstation() : Object() {};
-    void DrawPumpstation(float posx, float posy, float posz);
+    void DrawPumpstation(float posx, float posy, float posz, float lightPos[]);
 };
 
 class Streetlamp : public Object
