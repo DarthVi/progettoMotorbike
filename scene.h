@@ -17,7 +17,7 @@ class Barile : public Object
 {
 public:
     Barile() : Object() {};
-    void DrawBarile(float posx, float posy, float posz);
+    void DrawBarile(float posx, float posy, float posz, float lightPos[]);
 };
 
 class Pumpstation : public Object

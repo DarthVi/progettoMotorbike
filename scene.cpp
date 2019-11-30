@@ -58,7 +58,7 @@ void Tabellone::DrawTabellone()
 
 }
 
-void Barile::DrawBarile(float posx, float posy, float posz)
+void Barile::DrawBarile(float posx, float posy, float posz, float lightPos[])
 {
     drawBarileHelper(posx, posy, posz, false);
 
@@ -67,7 +67,7 @@ void Barile::DrawBarile(float posx, float posy, float posz)
     {
         glPushMatrix();
 
-        glShadowProjection(lightPosition, e, n);
+        glShadowProjection(lightPos, e, n);
         glDisable(GL_LIGHTING);
         glDisable(GL_TEXTURE_2D);
         glColor3f(0.2, 0.2, 0.2);
