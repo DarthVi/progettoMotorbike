@@ -39,6 +39,11 @@ void drawPumpstationHelper(float posx, float posy, float posz, float shadow);
 void drawStatuaHelper(float posx, float posy, float posz, bool shadow);
 void drawBenchHelper(float posx, float posy, float posz, bool shadow);
 
+void setupPumpBodyMaterial();
+void setupPumpGunMaterial();
+void setupDefaultMaterial();
+void setupStatuaMaterial();
+
 void Tabellone::DrawTabellone()
 {
     drawTabelloneHelper(false);
@@ -288,32 +293,100 @@ void drawPumpstationHelper(float posx, float posy, float posz, float shadow)
     glScalef(3, 3, 3);
 
     glPushMatrix();
-    if(!shadow) glColor3f(1, 0, .0);
+    if(!shadow)
+    {
+        //setupPumpBodyMaterial();
+        glColor3f(1, 0, .0);
+    }
     glTranslatef(posx, posy, posz);
     pumpBody.RenderNxV();
-    if(!shadow) glColor3f(0,0,0);
+    if(!shadow)
+    {
+        //setupPumpGunMaterial();
+        glColor3f(0,0,0);
+    }
     pumpGun.RenderNxV();
     glPopMatrix();
 
     glPopMatrix();
+
+    //setupDefaultMaterial();
 }
 
+//pump gun material: black plastic
+void setupPumpGunMaterial()
+{
+    float mat[4] = {0.0, 0.0, 0.0, 1.0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+    mat[0] = 0.1;
+    mat[1] = 0.1;
+    mat[2] = 0.1;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+    mat[0] = 0.5;
+    mat[1] = 0.5;
+    mat[2] = 0.5;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.25*128);
+}
+
+//pump body material: chrome
+void setupPumpBodyMaterial()
+{
+    float mat[4] = {0.25, 0.25, 0.25, 1.0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+    mat[0] = 0.4;
+    mat[1] = 0.4;
+    mat[2] = 0.4;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+    mat[0] = 0.774597;
+    mat[1] = 0.774597;
+    mat[2] = 0.774597;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6*128);
+}
+
+void setupDefaultMaterial()
+{
+    static float tmpcol[4] = {1,1,1,  1};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, tmpcol);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, tmpcol);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 127);
+}
 void drawStatuaHelper(float posx, float posy, float posz, bool shadow)
 {
     glPushMatrix();
     glScalef(1, 1, 1);
 
-
     glPushMatrix();
     if (!shadow)
-        glColor3f(.7, .7, .7);
+        glColor3f(.65, .49, .24);
     glTranslatef(posx, posy, posz);
     glRotated(90, 0, 1, 0);
 
+    //glEnable(GL_COLOR_MATERIAL);
+    setupStatuaMaterial();
     statuaMesh.RenderNxV();
+    setupDefaultMaterial();
+    //glDisable(GL_COLOR_MATERIAL);
     glPopMatrix();
 
     glPopMatrix();
+}
+
+//statua material: bronze
+void setupStatuaMaterial()
+{
+    float mat[4] = {0.2125, 0.1275, 0.054, 1.0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+    mat[0] = 0.714;
+    mat[1] = 0.4284;
+    mat[2] = 0.18144;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+    mat[0] = 0.393548;
+    mat[1] = 0.271906;
+    mat[2] = 0.166721;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.2*128);
 }
 
 void drawBenchHelper(float posx, float posy, float posz, bool shadow)
