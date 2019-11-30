@@ -4,8 +4,8 @@ CPP  = g++
 CC   = gcc
 BIN  = progettoMotorbike
 
-OBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o waypoint.o statua.o bench.o
-LINKOBJ  = main.o motorbike.o mesh.o tabellone.o utils.o streetlamp.o barile.o pumpstation.o waypoint.o statua.o bench.o
+OBJ  = main.o motorbike.o mesh.o utils.o waypoint.o scene.o
+LINKOBJ  = main.o motorbike.o mesh.o utils.o waypoint.o scene.o
 
 # Library linking
 OS := $(shell uname)
@@ -47,29 +47,14 @@ main.o: main.cpp
 motorbike.o: motorbike.cpp
 	$(CPP) -c $(FRMPATH) motorbike.cpp -o motorbike.o
 
-tabellone.o: tabellone.cpp
-	$(CPP) -c $(FRMPATH) tabellone.cpp -o tabellone.o
+scene.o: scene.cpp
+	$(CPP) -c $(FRMPATH) scene.cpp -o scene.o
 
 utils.o: utils.cpp
 	$(CPP) -c $(FRMPATH) utils.cpp -o utils.o
 
-streetlamp.o: streetlamp.cpp
-	$(CPP) -c $(FRMPATH) streetlamp.cpp -o streetlamp.o
-
-barile.o: barile.cpp
-	$(CPP) -c $(FRMPATH) barile.cpp -o barile.o
-
-pumpstation.o: pumpstation.cpp
-	$(CPP) -c $(FRMPATH) pumpstation.cpp -o pumpstation.o
-
 waypoint.o: waypoint.cpp
 	$(CPP) -c $(FRMPATH) waypoint.cpp -o waypoint.o
-
-statua.o: statua.cpp
-	$(CPP) -c $(FRMPATH) statua.cpp -o statua.o
-
-bench.o: bench.cpp
-	$(CPP) -c $(FRMPATH) bench.cpp -o bench.o
 
 mesh.o: mesh.cpp
 	$(CPP) -c $(FRMPATH) mesh.cpp -o mesh.o

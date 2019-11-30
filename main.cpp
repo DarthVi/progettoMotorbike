@@ -17,12 +17,7 @@
 
 #include "utils.h"
 #include "motorbike.h"
-#include "tabellone.h"
-#include "streetlamp.h"
-#include "statua.h"
-#include "bench.h"
-#include "barile.h"
-#include "pumpstation.h"
+#include "scene.h"
 #include "waypoint.h"
 
 #define CAMERA_BACK_CAR 0
