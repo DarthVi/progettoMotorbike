@@ -295,17 +295,23 @@ void drawPumpstationHelper(float posx, float posy, float posz, float shadow)
     glPushMatrix();
     if(!shadow)
     {
-        //setupPumpBodyMaterial();
+        bool isColorMaterialEnabled = glIsEnabled(GL_COLOR_MATERIAL);
+
+        if(!isColorMaterialEnabled)
+            glEnable(GL_COLOR_MATERIAL);
+
+        setupPumpBodyMaterial();
         glColor3f(1, 0, .0);
     }
     glTranslatef(posx, posy, posz);
     pumpBody.RenderNxV();
     if(!shadow)
     {
-        //setupPumpGunMaterial();
+        setupPumpGunMaterial();
         glColor3f(0,0,0);
     }
     pumpGun.RenderNxV();
+    setupDefaultMaterial();
     glPopMatrix();
 
     glPopMatrix();
@@ -358,16 +364,23 @@ void drawStatuaHelper(float posx, float posy, float posz, bool shadow)
     glScalef(1, 1, 1);
 
     glPushMatrix();
+
+    //printf("%d\n", isColorMaterialEnabled);
     if (!shadow)
+    {
+        bool isColorMaterialEnabled = glIsEnabled(GL_COLOR_MATERIAL);
+
+        if(!isColorMaterialEnabled)
+            glEnable(GL_COLOR_MATERIAL);
+        
+        setupStatuaMaterial();
         glColor3f(.65, .49, .24);
+    }
     glTranslatef(posx, posy, posz);
     glRotated(90, 0, 1, 0);
 
-    //glEnable(GL_COLOR_MATERIAL);
-    setupStatuaMaterial();
     statuaMesh.RenderNxV();
     setupDefaultMaterial();
-    //glDisable(GL_COLOR_MATERIAL);
     glPopMatrix();
 
     glPopMatrix();
