@@ -372,7 +372,7 @@ void drawStatuaHelper(float posx, float posy, float posz, bool shadow)
 
         if(!isColorMaterialEnabled)
             glEnable(GL_COLOR_MATERIAL);
-        
+
         setupStatuaMaterial();
         glColor3f(.65, .49, .24);
     }
