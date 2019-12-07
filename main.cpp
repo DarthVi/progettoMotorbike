@@ -773,6 +773,56 @@ void endGame(SDL_Window *win, TTF_Font *font)
 
 }
 
+int handleTime(SDL_Window *win, double currTime, TTF_Font *font)
+{
+    int done = 0;
+    bool pressed = false;
+    Uint32 windowID;
+    SDL_Event e;
+
+    //se sono passati i secondi disponibili
+    if(currTime / CLOCKS_PER_SEC >= TIMEAVAILABLE)
+    {
+        done = 1;
+
+        while(!pressed)
+        {
+            if (SDL_PollEvent(&e))
+            {
+                switch (e.type)
+                {
+                    case SDL_KEYDOWN:
+                        pressed = true;
+                        break;
+                    case SDL_WINDOWEVENT:
+                        windowID = SDL_GetWindowID(win);
+                        if (e.window.windowID == windowID)
+                        {
+                            switch (e.window.event)
+                            {
+                                case SDL_WINDOWEVENT_SIZE_CHANGED:
+                                {
+                                    scrW = e.window.data1;
+                                    scrH = e.window.data2;
+                                    glViewport(0, 0, scrW,
+                                               scrH);
+                                    break;
+                                }
+                            }
+                        }
+                }
+            } else
+            { // disegno la schermata di fine gioco
+                endGame(win, font);
+            }
+        }
+    } else{
+        //tempo libero
+    }
+
+    return done;
+}
+
 int main(int argc, char* argv[])
 {
 SDL_Window *win;
@@ -977,48 +1027,8 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
       finalTime = clock();
       currentTime = finalTime - initTime;
 
-      //se sono passati i secondi disponibili
-      if(currentTime / CLOCKS_PER_SEC >= TIMEAVAILABLE)
-      {
-          done = 1;
-
-          while(!pressed)
-          {
-              if (SDL_PollEvent(&e))
-              {
-                  switch (e.type)
-                  {
-                      case SDL_KEYDOWN:
-                          pressed = true;
-                          break;
-                      case SDL_WINDOWEVENT:
-                          windowID = SDL_GetWindowID(win);
-                          if (e.window.windowID == windowID)
-                          {
-                              switch (e.window.event)
-                              {
-                                  case SDL_WINDOWEVENT_SIZE_CHANGED:
-                                  {
-                                      scrW = e.window.data1;
-                                      scrH = e.window.data2;
-                                      glViewport(0, 0, scrW,
-                                                 scrH);
-                                      break;
-                                  }
-                              }
-                          }
-                  }
-              } else
-              { // disegno la schermata di fine gioco
-                  endGame(win, font);
-              }
-          }
-      }
-
-      //redraw();
-      else{
-        // tempo libero!!!
-      }
+      //gestisce il tempo rimanente
+      done = handleTime(win, currentTime, font);
     }
   }
 SDL_GL_DeleteContext(mainContext);
