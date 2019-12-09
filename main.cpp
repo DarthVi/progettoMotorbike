@@ -534,7 +534,6 @@ void DrawWaypointLocation(float px, float py, float pz)
 {
     waypoint.RespawnWaypoint();
     waypoint.Render(px, py, pz);
-    waypoint.isDrawn = true;
 }
 
 void drawMinimap()

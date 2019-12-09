@@ -100,7 +100,6 @@ void Waypoint::Render(float px, float py, float pz)
     {
         punteggio++;
         respawn = true;
-        isDrawn = false;
     }
 }
 
