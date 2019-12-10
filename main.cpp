@@ -659,7 +659,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
 
   drawFloor(); // disegna il suolo
   //drawPista(); // disegna la pista
-  tabellone.DrawTabellone(); //disegna il tabellone
+  tabellone.DrawTabellone(500, 0, 500); //disegna il tabellone
   streetlamp.DrawStreetlamp(0, 0, -10);
   float lampLightPosition[4] = {0, 10, -10, 1}; //posizione della luce della streetlamp
   barile.DrawBarile(-100, +5.3, -100, lightPosition);

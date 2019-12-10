@@ -31,7 +31,7 @@ Mesh pumpGun((char *) "meshes/pumpGun.obj");
 Mesh statuaMesh((char *) "meshes/screaming_statue.obj");
 Mesh benchMesh((char *) "meshes/bench.obj");
 
-void drawTabelloneHelper(bool shadow);
+void drawTabelloneHelper(float posx, float posy, float posz, bool shadow);
 void drawBarileHelper(float posx, float posy, float posz, bool shadow);
 void drawStreetLampHelper(float posx, float posy, float posz, bool shadow);
 void drawLampLight(float posx, float posy, float posz, int lightN);
@@ -44,9 +44,9 @@ void setupPumpGunMaterial();
 void setupDefaultMaterial();
 void setupStatuaMaterial();
 
-void Tabellone::DrawTabellone()
+void Tabellone::DrawTabellone(float posx, float posy, float posz)
 {
-    drawTabelloneHelper(false);
+    drawTabelloneHelper(posx, posy, posz, false);
 
     //disegna l'ombra
     if (useShadow)
@@ -56,7 +56,7 @@ void Tabellone::DrawTabellone()
         glShadowProjection(lightPosition, e, n);
         glDisable(GL_LIGHTING);
         glColor3f(0.2, 0.2, 0.2);
-        drawTabelloneHelper(true);
+        drawTabelloneHelper(posx, posy, posz, true);
         glEnable(GL_LIGHTING);
         glPopMatrix();
     }
@@ -155,7 +155,7 @@ void Bench::DrawBench(float posx, float posy, float posz)
     }
 }
 
-void drawTabelloneHelper(bool shadow)
+void drawTabelloneHelper(float posx, float posy, float posz, bool shadow)
 {
     glPushMatrix();
     glScalef(-0.02, 0.02, -0.02);
@@ -163,7 +163,7 @@ void drawTabelloneHelper(bool shadow)
     glPushMatrix();
     if (!shadow)
         glColor3f(.5, .5, .5);
-    glTranslatef(500, 0, 500);
+    glTranslatef(posx, posy, posz);
     tabelloneStruct.RenderNxV();
     glPopMatrix();
 

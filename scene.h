@@ -10,7 +10,7 @@
 class Tabellone : public Object{
 public:
     Tabellone() : Object() {};
-    void DrawTabellone();
+    void DrawTabellone(float posx, float posy, float posz);
 };
 
 class Barile : public Object
