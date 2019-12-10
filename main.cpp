@@ -44,7 +44,7 @@ bool simpleMinimap = true;
 // setto la posizione luce
 float lightPosition[4] = {0,20,2,  1}; // ultima comp=0 => luce direzionale
 int punteggio = 0;
-int radarRadius = 100;
+int radarRadius = 110;
 
 Motorbike motorbike; // la nostra moto
 Tabellone tabellone;

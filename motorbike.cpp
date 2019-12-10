@@ -82,6 +82,19 @@ void SetupWheelTexture(Point3 min, Point3 max){
   glTexGenfv(GL_T, GL_OBJECT_PLANE, t); 
 }
 
+//fissa un muro invisibile che ci permette di non andare oltre lo skybox
+void handleInvisibleWall(float *posx, float *posz)
+{
+    if (*posz >= 70)
+        *posz = 70;
+    if (*posz <= -70)
+        *posz = -70;
+    if (*posx >= 70)
+        *posx = 70;
+    if (*posx <= -70)
+        *posx = -70;
+}
+
 // DoStep: facciamo un passo di fisica (a delta_t costante)
 //
 // Indipendente dal rendering.
@@ -136,14 +149,7 @@ void Motorbike::DoStep(){
   pz+=vz;
 
   //evito che la moto vada oltre lo skybox
-  if (pz >= 70)
-    pz = 70;
-  if (pz <= -70)
-    pz = -70;
-  if (px >= 70)
-    px = 70;
-  if (px <= -70)
-    px = -70;
+  handleInvisibleWall(&px, &pz);
 } 
 
 //void drawCube(); // questa e' definita altrove (quick hack)
