@@ -552,7 +552,7 @@ void drawMinimap()
     // disegnamo il background della mappa
     // Uso GL_TRIANGLE_FAN per formare un cerchio
     glPushMatrix();
-    glTranslatef(+30, +720, 0);
+    glTranslatef(+30, scrH-30, 0);
     glBegin(GL_TRIANGLE_FAN);
     glColor3ub(255, 255, 255);  // Bianco
     glVertex2f(0.0f, 0.0f);       // Centro del cerchio
@@ -567,7 +567,7 @@ void drawMinimap()
 
     //disegnamo la cornice della mappa
     glPushMatrix();
-    glTranslatef(+30, +720, 0);
+    glTranslatef(+30, scrH-30, 0);
     glBegin(GL_LINE_LOOP);
     glColor3ub(0, 0, 0);  // Black
     numSegments = 100;
