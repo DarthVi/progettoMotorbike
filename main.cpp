@@ -712,13 +712,13 @@ void rendering(SDL_Window *win, TTF_Font *font){
   sprintf(str, "%d", (int)fps);
   char text2[] = "FPS: ";
   SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text2, str),
-                    scrW -700, scrH - 50, shaded);
+                    +50, scrH - 50, shaded);
 
   int remainingTime = TIMEAVAILABLE - (currentTime / CLOCKS_PER_SEC);
   char text3[] = "Tempo: ";
   sprintf(str, "%d", remainingTime);
   SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text3, str),
-                    scrW -700, scrH - 90, shaded);
+                    +50, scrH - 90, shaded);
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
