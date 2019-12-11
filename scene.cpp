@@ -452,7 +452,6 @@ void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float pos
 {
     const float S = 2;
     const float H = 0.02;
-    glTranslatef(posx, posy, posz);
 
     /* Clear; default stencil clears to zero. */
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -466,6 +465,8 @@ void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float pos
     glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
     glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
 
+    glPushMatrix();
+    glTranslatef(posx, posy, posz);
     glBegin(GL_QUADS);
         glNormal3f(0,1,0);
         glVertex3d(-S, H, -S);
@@ -473,6 +474,7 @@ void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float pos
         glVertex3d(+S, H, +S);
         glVertex3d(-S, H, +S);
     glEnd();
+    glPopMatrix();
 
     /* Re-enable update of color and depth. */
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -498,6 +500,8 @@ void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float pos
     glDisable(GL_STENCIL_TEST);
 
     /* Draw "top" of floor.  Use blending to blend in reflection. */
+    glPushMatrix();
+    glTranslatef(posx, posy, posz);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glColor4f(0.372549, 0.623529, 0.623529, 0.3);
@@ -509,4 +513,5 @@ void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float pos
         glVertex3d(-S, H, +S);
     glEnd();
     glDisable(GL_BLEND);
+    glPopMatrix();
 }

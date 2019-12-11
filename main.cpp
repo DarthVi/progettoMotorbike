@@ -672,7 +672,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
 
   DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
 
-  pozzanghera.DrawWaterpool(motorbike,0,0,0);
+  pozzanghera.DrawWaterpool(motorbike,-10,0,-5);
   motorbike.Render(false); // disegna la macchina
 	
   // attendiamo la fine della rasterizzazione di 
