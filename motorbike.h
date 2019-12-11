@@ -1,3 +1,7 @@
+
+#ifndef MOTORBIKE_H
+#define MOTORBIKE_H
+
 class Controller{
 public:
   enum { LEFT=0, RIGHT=1, ACC=2, DEC=3, NKEYS=4};
@@ -18,7 +22,7 @@ class Motorbike{
 public:
   // Metodi
   void Init(); // inizializza variabili
-  void Render() const; // disegna a schermo
+  void Render(bool isOnWaterpool) const; // disegna a schermo
   void DoStep(); // computa un passo del motore fisico
   Motorbike(){Init();} // costruttore
  
@@ -39,3 +43,5 @@ public:
 private:
   void DrawHeadlight(float x, float y, float z, int lightN, bool useHeadlight) const;
 };
+
+#endif

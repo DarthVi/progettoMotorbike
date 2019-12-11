@@ -6,6 +6,7 @@
 #define SCENE_H
 
 #include "object.h"
+#include "motorbike.h"
 
 class Tabellone : public Object{
 public:
@@ -46,6 +47,13 @@ class Bench : public Object
 public:
     Bench() : Object() {};
     void DrawBench(float posx, float posy, float posz);
+};
+
+class Waterpool
+{
+public:
+    Waterpool() = default;
+    void DrawWaterpool(Motorbike mbike, float posx, float posy, float posz);
 };
 
 #endif //SCENE_H

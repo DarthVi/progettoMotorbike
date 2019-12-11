@@ -15,10 +15,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/meshes/tabellonePanel.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/meshes/tabelloneStruct.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/motorbike.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/motorbike.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/motorbike.h" beforeDir="false" afterPath="$PROJECT_DIR$/motorbike.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/motorbike.o" beforeDir="false" afterPath="$PROJECT_DIR$/motorbike.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/progettoMotorbike" beforeDir="false" afterPath="$PROJECT_DIR$/progettoMotorbike" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/scene.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scene.o" beforeDir="false" afterPath="$PROJECT_DIR$/scene.o" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,7 +82,7 @@
       <workItem from="1575153220260" duration="7577000" />
       <workItem from="1575200841985" duration="610000" />
       <workItem from="1575712792894" duration="2699000" />
-      <workItem from="1575831721093" duration="8334000" />
+      <workItem from="1575831721093" duration="14101000" />
     </task>
     <servers />
   </component>

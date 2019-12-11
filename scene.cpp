@@ -447,3 +447,66 @@ void drawBenchHelper(float posx, float posy, float posz, bool shadow)
 
     glPopMatrix();
 }
+
+void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float posz)
+{
+    const float S = 2;
+    const float H = 0.02;
+    glTranslatef(posx, posy, posz);
+
+    /* Clear; default stencil clears to zero. */
+    glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    /* Don't update color or depth. */
+    glDisable(GL_DEPTH_TEST);
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+
+    /* Draw 1 into the stencil buffer. */
+    glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_REPLACE, GL_REPLACE, GL_REPLACE);
+    glStencilFunc(GL_ALWAYS, 1, 0xffffffff);
+
+    glBegin(GL_QUADS);
+        glNormal3f(0,1,0);
+        glVertex3d(-S, H, -S);
+        glVertex3d(+S, H, -S);
+        glVertex3d(+S, H, +S);
+        glVertex3d(-S, H, +S);
+    glEnd();
+
+    /* Re-enable update of color and depth. */
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+    glEnable(GL_DEPTH_TEST);
+
+    /* Now, only render where stencil is set to 1. */
+    glStencilFunc(GL_EQUAL, 1, 0xffffffff);  /* draw if ==1 */
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+    glPushMatrix();
+
+    /* The critical reflection step: Reflect motorbike through the floor
+         (the Y=0 plane) to make a reflection. */
+    glScalef(1.0, -1.0, 1.0);
+
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+    mbike.Render(true);
+
+    glPopMatrix();
+
+    //restore light position
+    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+    glDisable(GL_STENCIL_TEST);
+
+    /* Draw "top" of floor.  Use blending to blend in reflection. */
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glColor4f(0.372549, 0.623529, 0.623529, 0.3);
+    glBegin(GL_QUADS);
+        glNormal3f(0,1,0);
+        glVertex3d(-S, H, -S);
+        glVertex3d(+S, H, -S);
+        glVertex3d(+S, H, +S);
+        glVertex3d(-S, H, +S);
+    glEnd();
+    glDisable(GL_BLEND);
+}

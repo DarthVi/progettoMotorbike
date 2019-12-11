@@ -54,6 +54,7 @@ Pumpstation pumpstation;
 Waypoint waypoint;
 Statua statua;
 Bench bench;
+Waterpool pozzanghera;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
 double initTime;
@@ -671,7 +672,8 @@ void rendering(SDL_Window *win, TTF_Font *font){
 
   DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
 
-  motorbike.Render(); // disegna la macchina
+  pozzanghera.DrawWaterpool(motorbike,0,0,0);
+  motorbike.Render(false); // disegna la macchina
 	
   // attendiamo la fine della rasterizzazione di 
   // tutte le primitive mandate 

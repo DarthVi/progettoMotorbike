@@ -350,7 +350,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
 }
  
 // disegna a schermo
-void Motorbike::Render() const{
+void Motorbike::Render(bool isOnWaterpool) const{
   // sono nello spazio mondo
   
   //drawAxis(); // disegno assi spazio mondo
@@ -367,9 +367,9 @@ void Motorbike::Render() const{
   RenderAllParts(true);
   
   // ombra!
-  if(useShadow)
+  if(useShadow && !isOnWaterpool)
   {
-    glColor3f(0.15,0.15,0.15); // colore fisso
+    glColor3f(0.2,0.2,0.2); // colore fisso
     glTranslatef(0,0.01,0); // alzo l'ombra di un epsilon per evitare z-fighting con il pavimento
     glScalef(1.01,0,1.01);  // appiattisco sulla Y, ingrandisco dell'1% sulla Z e sulla X
     glDisable(GL_LIGHTING); // niente lighing per l'ombra
