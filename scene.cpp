@@ -22,8 +22,8 @@ extern bool useShadow;
 extern float lightPosition[];
 extern bool useWireframe;
 
-Mesh tabelloneStruct((char *) "meshes/tabelloneStruct.obj");
-Mesh tabellonePanel((char *) "meshes/tabellonePanel.obj");
+Mesh tabelloneStruct((char *) "meshes/smallBillboardBase.obj");
+Mesh tabellonePanel((char *) "meshes/smallBillboardPanel.obj");
 Mesh barileMesh((char *) "meshes/Gasoline_barrel.obj");
 Mesh streetlampMesh((char *) "meshes/streetlamp.obj");
 Mesh pumpBody((char *) "meshes/pumpBody.obj");
@@ -158,7 +158,7 @@ void Bench::DrawBench(float posx, float posy, float posz)
 void drawTabelloneHelper(float posx, float posy, float posz, bool shadow)
 {
     glPushMatrix();
-    glScalef(-0.02, 0.02, -0.02);
+    //glScalef(-0.02, 0.02, -0.02);
 
     glPushMatrix();
     if (!shadow)
@@ -168,7 +168,7 @@ void drawTabelloneHelper(float posx, float posy, float posz, bool shadow)
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(500, 0, 500);
+    glTranslatef(posx, posy, posz);
     if (!shadow)
     {
         glColor3f(1, 1, 1);
@@ -180,7 +180,7 @@ void drawTabelloneHelper(float posx, float posy, float posz, bool shadow)
             glDisable(GL_TEXTURE_GEN_T);
             glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
             //crea un quads ed inserisci una texture le cui coordinate corrispondono
-            //ai vertici del bounding box del tabellone
+            //ai vertici del bounding box del pannello del tabellone
             glBegin(GL_QUADS);
             glTexCoord2f(0.0, 1.0);
             glVertex2d((tabellonePanel.bbmin.X()), tabellonePanel.bbmin.Y());
