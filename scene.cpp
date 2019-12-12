@@ -30,6 +30,7 @@ Mesh pumpBody((char *) "meshes/pumpBody.obj");
 Mesh pumpGun((char *) "meshes/pumpGun.obj");
 Mesh statuaMesh((char *) "meshes/screaming_statue.obj");
 Mesh benchMesh((char *) "meshes/bench.obj");
+Mesh puddleMesh((char *) "meshes/puddle.obj");
 
 void drawTabelloneHelper(float posx, float posy, float posz, bool shadow);
 void drawBarileHelper(float posx, float posy, float posz, bool shadow);
@@ -448,10 +449,10 @@ void drawBenchHelper(float posx, float posy, float posz, bool shadow)
     glPopMatrix();
 }
 
-void drawFloorPuddle()
+void drawFloorPuddle(float h)
 {
     const float S = 2;
-    const float H = 0.02;
+    const float H = h;
 
     if(!useWireframe)
     {
@@ -465,26 +466,23 @@ void drawFloorPuddle()
     }
 
     glBegin(GL_QUADS);
-        glColor3f(0.6, 0.6, 0.6); // colore uguale x tutti i quads
-        glNormal3f(0,1,0);
-        if(!useWireframe) glTexCoord2f(0.0, 0.0);
-        glVertex3d(-S, H, -S);
-        if(!useWireframe) glTexCoord2f(1.0, 0.0);
-        glVertex3d(+S, H, -S);
-        if(!useWireframe) glTexCoord2f(1.0, 1.0);
-        glVertex3d(+S, H, +S);
-        if(!useWireframe) glTexCoord2f(0.0, 1.0);
-        glVertex3d(-S, H, +S);
+    glColor3f(0.6, 0.6, 0.6); // colore uguale x tutti i quads
+    glNormal3f(0,1,0);
+    if(!useWireframe) glTexCoord2f(0.0, 0.0);
+    glVertex3d(-S, H, -S);
+    if(!useWireframe) glTexCoord2f(1.0, 0.0);
+    glVertex3d(+S, H, -S);
+    if(!useWireframe) glTexCoord2f(1.0, 1.0);
+    glVertex3d(+S, H, +S);
+    if(!useWireframe) glTexCoord2f(0.0, 1.0);
+    glVertex3d(-S, H, +S);
     glEnd();
 }
 void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float posz)
 {
-    const float S = 2;
-    const float H = 0.02;
-
     glPushMatrix();
     glTranslatef(posx, posy, posz);
-    drawFloorPuddle();
+    drawFloorPuddle(posy);
     glPopMatrix();
 
     /* Clear; default stencil clears to zero. */
@@ -501,13 +499,7 @@ void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float pos
 
     glPushMatrix();
     glTranslatef(posx, posy, posz);
-    glBegin(GL_QUADS);
-        glNormal3f(0,1,0);
-        glVertex3d(-S, H, -S);
-        glVertex3d(+S, H, -S);
-        glVertex3d(+S, H, +S);
-        glVertex3d(-S, H, +S);
-    glEnd();
+    puddleMesh.RenderNxV();
     glPopMatrix();
 
     /* Re-enable update of color and depth. */
@@ -539,13 +531,7 @@ void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float pos
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glColor4f(0.372549, 0.623529, 0.623529, 0.3);
-    glBegin(GL_QUADS);
-        glNormal3f(0,1,0);
-        glVertex3d(-S, H, -S);
-        glVertex3d(+S, H, -S);
-        glVertex3d(+S, H, +S);
-        glVertex3d(-S, H, +S);
-    glEnd();
+    puddleMesh.RenderNxV();
     glDisable(GL_BLEND);
     glPopMatrix();
 }

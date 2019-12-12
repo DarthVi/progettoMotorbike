@@ -658,7 +658,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
 
 
 
-  pozzanghera.DrawWaterpool(motorbike,-10,0,-5);
+  pozzanghera.DrawWaterpool(motorbike,-10,0.02,-5);
   drawSky(); // disegna il cielo come sfondo
   drawFloor(); // disegna il suolo
   //drawPista(); // disegna la pista
