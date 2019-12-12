@@ -54,7 +54,7 @@ Pumpstation pumpstation;
 Waypoint waypoint;
 Statua statua;
 Bench bench;
-Waterpool pozzanghera;
+Waterpuddle pozzanghera;
 int nstep=0; // numero di passi di FISICA fatti fin'ora
 const int PHYS_SAMPLING_STEP=10; // numero di millisec che un passo di fisica simula
 double initTime;
@@ -658,7 +658,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
 
 
 
-  pozzanghera.DrawWaterpool(motorbike,-10,0.02,-5);
+  pozzanghera.DrawWaterpuddle(motorbike,-10,0.02,-5);
   drawSky(); // disegna il cielo come sfondo
   drawFloor(); // disegna il suolo
   //drawPista(); // disegna la pista

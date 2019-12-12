@@ -49,11 +49,11 @@ public:
     void DrawBench(float posx, float posy, float posz);
 };
 
-class Waterpool
+class Waterpuddle
 {
 public:
-    Waterpool() = default;
-    void DrawWaterpool(Motorbike mbike, float posx, float posy, float posz);
+    Waterpuddle() = default;
+    void DrawWaterpuddle(Motorbike mbike, float posx, float posy, float posz);
 };
 
 #endif //SCENE_H

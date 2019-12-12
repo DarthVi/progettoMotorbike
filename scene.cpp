@@ -478,7 +478,7 @@ void drawFloorPuddle(float h)
     glVertex3d(-S, H, +S);
     glEnd();
 }
-void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float posz)
+void Waterpuddle::DrawWaterpuddle(Motorbike mbike, float posx, float posy, float posz)
 {
     glPushMatrix();
     glTranslatef(posx, posy, posz);
