@@ -516,13 +516,10 @@ void Waterpuddle::DrawWaterpuddle(Motorbike mbike, float posx, float posy, float
          (the Y=0 plane) to make a reflection. */
     glScalef(1.0, -1.0, 1.0);
 
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
     mbike.Render(true);
 
     glPopMatrix();
-
-    //restore light position
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+    
     glDisable(GL_STENCIL_TEST);
 
     /* Draw "top" of floor.  Use blending to blend in reflection. */
