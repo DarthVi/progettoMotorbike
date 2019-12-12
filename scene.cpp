@@ -448,10 +448,44 @@ void drawBenchHelper(float posx, float posy, float posz, bool shadow)
     glPopMatrix();
 }
 
+void drawFloorPuddle()
+{
+    const float S = 2;
+    const float H = 0.02;
+
+    if(!useWireframe)
+    {
+        // inizializzo la texture della strada
+        glBindTexture(GL_TEXTURE_2D, ROAD);
+        glEnable(GL_TEXTURE_2D);
+
+        glDisable(GL_TEXTURE_GEN_S);
+        glDisable(GL_TEXTURE_GEN_T);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    }
+
+    glBegin(GL_QUADS);
+        glColor3f(0.6, 0.6, 0.6); // colore uguale x tutti i quads
+        glNormal3f(0,1,0);
+        if(!useWireframe) glTexCoord2f(0.0, 0.0);
+        glVertex3d(-S, H, -S);
+        if(!useWireframe) glTexCoord2f(1.0, 0.0);
+        glVertex3d(+S, H, -S);
+        if(!useWireframe) glTexCoord2f(1.0, 1.0);
+        glVertex3d(+S, H, +S);
+        if(!useWireframe) glTexCoord2f(0.0, 1.0);
+        glVertex3d(-S, H, +S);
+    glEnd();
+}
 void Waterpool::DrawWaterpool(Motorbike mbike, float posx, float posy, float posz)
 {
     const float S = 2;
     const float H = 0.02;
+
+    glPushMatrix();
+    glTranslatef(posx, posy, posz);
+    drawFloorPuddle();
+    glPopMatrix();
 
     /* Clear; default stencil clears to zero. */
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);

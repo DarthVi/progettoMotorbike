@@ -655,9 +655,11 @@ void rendering(SDL_Window *win, TTF_Font *font){
   // settiamo matrice di modellazione
   //drawAxis(); // disegna assi frame OGGETTO
   //drawCubeWire();
-  
-  drawSky(); // disegna il cielo come sfondo
 
+
+
+  pozzanghera.DrawWaterpool(motorbike,-10,0,-5);
+  drawSky(); // disegna il cielo come sfondo
   drawFloor(); // disegna il suolo
   //drawPista(); // disegna la pista
   tabellone.DrawTabellone(-15, +11.35, -12); //disegna il tabellone
@@ -670,10 +672,8 @@ void rendering(SDL_Window *win, TTF_Font *font){
   statua.DrawStatua(-15,+1.3,0);
   bench.DrawBench(-150,0,-20);
 
-  DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
-
-  pozzanghera.DrawWaterpool(motorbike,-10,0,-5);
   motorbike.Render(false); // disegna la macchina
+  DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
 	
   // attendiamo la fine della rasterizzazione di 
   // tutte le primitive mandate 
