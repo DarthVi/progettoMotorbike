@@ -14,6 +14,7 @@ public:
     void Render(float px, float py, float pz);
     void RespawnWaypoint();
     void drawWaypoint(bool shadow);
+    bool checkCollision(float px, float py, float pz);
 
 
     Waypoint() : Object()

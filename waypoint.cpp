@@ -76,6 +76,11 @@ void Waypoint::drawWaypoint(bool shadow)
     glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 }
+bool Waypoint::checkCollision(float px, float py, float pz)
+{
+    return (px >= pos_x - 1 && px <= pos_x + 1 && py >= pos_y - 1 && py <= pos_y + 1
+            && pz >= pos_z - 1 && pz <= pos_z + 1);
+}
 
 void Waypoint::Render(float px, float py, float pz)
 {
@@ -95,8 +100,7 @@ void Waypoint::Render(float px, float py, float pz)
 
     glPopMatrix();
     // se la moto passa attraverso il waypoint
-    if (px >= pos_x - 1 && px <= pos_x + 1 && py >= pos_y - 1 && py <= pos_y + 1
-        && pz >= pos_z - 1 && pz <= pos_z + 1)
+    if (checkCollision(px, py, pz))
     {
         punteggio++;
         respawn = true;
