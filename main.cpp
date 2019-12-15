@@ -531,12 +531,6 @@ int H = 100;
 
 }
 
-void DrawWaypointLocation(float px, float py, float pz)
-{
-    waypoint.RespawnWaypoint();
-    waypoint.Render(px, py, pz);
-}
-
 void drawMinimap()
 {
     float moto_px, moto_pz, waypoint_px, waypoint_pz;
@@ -673,7 +667,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
   bench.DrawBench(-150,0,-20);
 
   motorbike.Render(false); // disegna la macchina
-  DrawWaypointLocation(motorbike.px, motorbike.py, motorbike.pz);
+  waypoint.Render(motorbike.px, motorbike.py, motorbike.pz);
 	
   // attendiamo la fine della rasterizzazione di 
   // tutte le primitive mandate 

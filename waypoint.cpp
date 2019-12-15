@@ -26,15 +26,13 @@ extern bool useShadow;
 
 void Waypoint::RespawnWaypoint()
 {
-    if(respawn)
-    {
-        srand(time(0));
-        pos_x = (rand() % 60 + 1) - 30;
-        pos_y = 0;
-        pos_z = (rand() % 60 + 1) - 30;
-        rotation = rand() % 360;
-        respawn = false;
-    }
+    srand(time(0));
+    //posizione random del waypoints
+    pos_x = (rand() % 60 + 1) - 30;
+    pos_y = 0;
+    pos_z = (rand() % 60 + 1) - 30;
+    //rotazione random
+    rotation = rand() % 360;
 }
 
 void Waypoint::drawWaypoint(bool shadow)
@@ -53,9 +51,8 @@ void Waypoint::drawWaypoint(bool shadow)
         //Applico la texture al disco
         gluQuadricTexture(quadric, true);
     }
-    //Imposto la posizione generata ed una piccola rotazione
+    //traslo sulla posizione scelta ed effettuo una rotazione random
     glTranslatef(pos_x, pos_y, pos_z);
-    //srand(time(0));
     glRotatef(rotation, 0, 1, 0);
     gluQuadricDrawStyle(quadric, GLU_FILL);		//Disegna un poligono pieno
 
@@ -76,6 +73,10 @@ void Waypoint::drawWaypoint(bool shadow)
     glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 }
+
+//px, py, pz are the coordinates of the motorbike
+//pos_x, pos_y, pos_z are the coordinates of the waypoint
+//simple check to see if we pass through the waypoint
 bool Waypoint::checkCollision(float px, float py, float pz)
 {
     return (px >= pos_x - 1 && px <= pos_x + 1 && py >= pos_y - 1 && py <= pos_y + 1
@@ -84,6 +85,12 @@ bool Waypoint::checkCollision(float px, float py, float pz)
 
 void Waypoint::Render(float px, float py, float pz)
 {
+    if(respawn)
+    {
+        RespawnWaypoint();
+        respawn = false;
+    }
+
     glPushMatrix();
     drawWaypoint(false);
 
