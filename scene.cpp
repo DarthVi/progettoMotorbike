@@ -75,7 +75,6 @@ void Barile::DrawBarile(float posx, float posy, float posz, float lightPos[])
 
         glShadowProjection(lightPos, e, n);
         glDisable(GL_LIGHTING);
-        glDisable(GL_TEXTURE_2D);
         glColor3f(0.2, 0.2, 0.2);
         drawBarileHelper(posx, posy, posz, true);
         glEnable(GL_LIGHTING);
@@ -129,7 +128,6 @@ void Statua::DrawStatua(float posx, float posy, float posz)
 
         glShadowProjection(lightPosition, e, n);
         glDisable(GL_LIGHTING);
-        glDisable(GL_TEXTURE_2D);
         glColor3f(0.2, 0.2, 0.2);
         drawStatuaHelper(posx, posy, posz, true);
         glEnable(GL_LIGHTING);
@@ -148,7 +146,6 @@ void Bench::DrawBench(float posx, float posy, float posz)
 
         glShadowProjection(lightPosition, e, n);
         glDisable(GL_LIGHTING);
-        glDisable(GL_TEXTURE_2D);
         glColor3f(0.2, 0.2, 0.2);
         drawBenchHelper(posx, posy, posz, true);
         glEnable(GL_LIGHTING);
@@ -208,8 +205,6 @@ void drawBarileHelper(float posx, float posy, float posz, bool shadow)
     glScalef(0.1, 0.1, 0.1);
 
     glPushMatrix();
-    if (!shadow)
-        glColor3f(.5, .5, .5);
     glTranslatef(posx, posy, posz);
     if (!shadow)
     {
@@ -233,7 +228,7 @@ void drawBarileHelper(float posx, float posy, float posz, bool shadow)
             glTexGenfv(GL_S, GL_OBJECT_PLANE, s);
             glTexGenfv(GL_T, GL_OBJECT_PLANE, t);
             glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
-            glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
+            //glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
 
         }
     }
@@ -354,7 +349,7 @@ void setupPumpBodyMaterial()
 
 void setupDefaultMaterial()
 {
-    static float tmpcol[4] = {1,1,1,  1};
+    float tmpcol[4] = {1,1,1,  1};
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, tmpcol);
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, tmpcol);
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 127);
@@ -409,8 +404,6 @@ void drawBenchHelper(float posx, float posy, float posz, bool shadow)
     glScalef(0.1, 0.1, 0.1);
 
     glPushMatrix();
-    if (!shadow)
-        glColor3f(.5, .5, .5);
     glTranslatef(posx, posy, posz);
     glRotated(90, 0, 1, 0);
     if (!shadow)
@@ -423,22 +416,24 @@ void drawBenchHelper(float posx, float posy, float posz, bool shadow)
             glEnable(GL_TEXTURE_2D);
             glEnable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
             glEnable(GL_TEXTURE_GEN_T);
+            glEnable(GL_TEXTURE_GEN_R);
             // ulilizzo le coordinate OGGETTO
             // cioe' le coordnate originali, PRIMA della moltiplicazione per la ModelView
             // in modo che la texture sia "attaccata" all'oggetto, e non "proiettata" su esso
             glTexGeni(GL_S, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
             glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
-            float sz=1.0/(benchMesh.bbmax.Z() - benchMesh.bbmin.Z());
-            float ty=1.0/(benchMesh.bbmax.Y() - benchMesh.bbmin.Y());
-            float tx=1.0 / (benchMesh.bbmax.X() - benchMesh.bbmin.X());
-            float s[4]={0,0,sz,  - benchMesh.bbmin.Z()*sz };
-            float t[4]={0,ty,0,  - benchMesh.bbmin.Y()*ty };
-            float r[4] = { tx, 0, 0, -benchMesh.bbmin.X() * tx };
-            glTexGenfv(GL_S, GL_OBJECT_PLANE, s);
-            glTexGenfv(GL_T, GL_OBJECT_PLANE, t);
-            glTexGenfv(GL_R, GL_OBJECT_PLANE, r);
+            glTexGeni(GL_R, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
+//            float sz=1.0/(benchMesh.bbmax.Z() - benchMesh.bbmin.Z());
+//            float ty=1.0/(benchMesh.bbmax.Y() - benchMesh.bbmin.Y());
+//            float tx=1.0 / (benchMesh.bbmax.X() - benchMesh.bbmin.X());
+//            float s[4]={0,0,sz,  - benchMesh.bbmin.Z()*sz };
+//            float t[4]={0,ty,0,  - benchMesh.bbmin.Y()*ty };
+//            float r[4] = { tx, 0, 0, -benchMesh.bbmin.X() * tx };
+//            glTexGenfv(GL_S, GL_OBJECT_PLANE, s);
+//            glTexGenfv(GL_T, GL_OBJECT_PLANE, t);
+//            glTexGenfv(GL_R, GL_OBJECT_PLANE, r);
             glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
-            glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
+            //glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
 
         }
     }
@@ -477,6 +472,8 @@ void drawFloorPuddle(float h)
     if(!useWireframe) glTexCoord2f(0.0, 1.0);
     glVertex3d(-S, H, +S);
     glEnd();
+
+    glDisable(GL_TEXTURE_2D);
 }
 void Waterpuddle::DrawWaterpuddle(Motorbike mbike, float posx, float posy, float posz)
 {

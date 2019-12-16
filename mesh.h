@@ -1,6 +1,8 @@
 // classe Vertex: 
 // i vertici della mesh
 
+#include "utils.h"
+
 class Vertex
 { 
 public: 
@@ -59,6 +61,7 @@ public:
   // metodi
   void RenderNxF(); // manda a schermo la mesh Normali x Faccia
   void RenderNxV(); // manda a schermo la mesh Normali x Vertice
+  //void RenderNxV_TexturedFaces(textures tex, bool shadow); //manda a schermo la mesh Normali x Vertice e per ogni faccia applica la texture
   void RenderWire(); // manda a schermo la mesh in wireframe
   
   bool LoadFromObj(char* filename); //  carica la mesh da un file OFF

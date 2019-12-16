@@ -362,7 +362,7 @@ void Motorbike::Render(bool isOnWaterpool) const{
   // sono nello spazio MACCHINA
   //drawAxis(); // disegno assi spazio macchina
   
-  DrawHeadlight(0,0,-1, 0, useHeadlight); // accendi faro sinistro
+  DrawHeadlight(0,0,-1, 0, useHeadlight); // accendi faro
 
   RenderAllParts(true);
   
