@@ -36,31 +36,41 @@ void drawTabelloneHelper(float posx, float posy, float posz, bool shadow);
 void drawBarileHelper(float posx, float posy, float posz, bool shadow);
 void drawStreetLampHelper(float posx, float posy, float posz, bool shadow);
 void drawLampLight(float posx, float posy, float posz, int lightN);
-void drawPumpstationHelper(float posx, float posy, float posz, float shadow);
+void drawPumpstationHelper(float posx, float posy, float posz, bool shadow);
 void drawStatuaHelper(float posx, float posy, float posz, bool shadow);
 void drawBenchHelper(float posx, float posy, float posz, bool shadow);
+void castShadow(float posx, float posy, float posz, float e[], float n[], float lPos[],
+        void (*fun_ptr) (float, float, float, bool));
 
 void setupPumpBodyMaterial();
 void setupPumpGunMaterial();
 void setupDefaultMaterial();
 void setupStatuaMaterial();
 
+//funzione usata per generare l'ombra
+//prende un puntatore alla funzione che si occupa di disegnare l'elemento con o senza ombra
+void castShadow(float posx, float posy, float posz, float e[], float n[], float lPos[],
+        void (*fun_ptr) (float, float, float, bool))
+{
+    if(useShadow)
+    {
+        glPushMatrix();
+
+        glShadowProjection(lPos, e, n);
+        glDisable(GL_LIGHTING);
+        glColor3f(0.2, 0.2, 0.2);
+        fun_ptr(posx, posy, posz, true);
+        glEnable(GL_LIGHTING);
+        glPopMatrix();
+    }
+}
+
 void Tabellone::DrawTabellone(float posx, float posy, float posz)
 {
     drawTabelloneHelper(posx, posy, posz, false);
 
     //disegna l'ombra
-    if (useShadow)
-    {
-        glPushMatrix();
-
-        glShadowProjection(lightPosition, e, n);
-        glDisable(GL_LIGHTING);
-        glColor3f(0.2, 0.2, 0.2);
-        drawTabelloneHelper(posx, posy, posz, true);
-        glEnable(GL_LIGHTING);
-        glPopMatrix();
-    }
+    castShadow(posx, posy, posz, e, n, lightPosition, drawTabelloneHelper);
 
 }
 
@@ -69,17 +79,7 @@ void Barile::DrawBarile(float posx, float posy, float posz, float lightPos[])
     drawBarileHelper(posx, posy, posz, false);
 
     //disegna l'ombra
-    if (useShadow)
-    {
-        glPushMatrix();
-
-        glShadowProjection(lightPos, e, n);
-        glDisable(GL_LIGHTING);
-        glColor3f(0.2, 0.2, 0.2);
-        drawBarileHelper(posx, posy, posz, true);
-        glEnable(GL_LIGHTING);
-        glPopMatrix();
-    }
+    castShadow(posx, posy, posz, e, n, lightPos, drawBarileHelper);
 }
 
 void Streetlamp::DrawStreetlamp(float posx, float posy, float posz)
@@ -104,17 +104,7 @@ void Pumpstation::DrawPumpstation(float posx, float posy, float posz, float ligh
 {
     drawPumpstationHelper(posx, posy, posz, false);
 
-    if(useShadow)
-    {
-        glPushMatrix();
-
-        glShadowProjection(lightPos, e, n);
-        glDisable(GL_LIGHTING);
-        glColor3f(0.2, 0.2, 0.2);
-        drawPumpstationHelper(posx, posy, posz, true);
-        glEnable(GL_LIGHTING);
-        glPopMatrix();
-    }
+    castShadow(posx, posy, posz, e, n, lightPos, drawPumpstationHelper);
 }
 
 void Statua::DrawStatua(float posx, float posy, float posz)
@@ -122,17 +112,7 @@ void Statua::DrawStatua(float posx, float posy, float posz)
     drawStatuaHelper(posx, posy, posz, false);
 
     //disegna l'ombra
-    if (useShadow)
-    {
-        glPushMatrix();
-
-        glShadowProjection(lightPosition, e, n);
-        glDisable(GL_LIGHTING);
-        glColor3f(0.2, 0.2, 0.2);
-        drawStatuaHelper(posx, posy, posz, true);
-        glEnable(GL_LIGHTING);
-        glPopMatrix();
-    }
+    castShadow(posx, posy, posz, e, n, lightPosition, drawStatuaHelper);
 }
 
 void Bench::DrawBench(float posx, float posy, float posz)
@@ -140,17 +120,7 @@ void Bench::DrawBench(float posx, float posy, float posz)
     drawBenchHelper(posx, posy, posz, false);
 
     //disegna l'ombra
-    if (useShadow)
-    {
-        glPushMatrix();
-
-        glShadowProjection(lightPosition, e, n);
-        glDisable(GL_LIGHTING);
-        glColor3f(0.2, 0.2, 0.2);
-        drawBenchHelper(posx, posy, posz, true);
-        glEnable(GL_LIGHTING);
-        glPopMatrix();
-    }
+    castShadow(posx, posy, posz, e, n, lightPosition, drawBenchHelper);
 }
 
 void drawTabelloneHelper(float posx, float posy, float posz, bool shadow)
@@ -283,7 +253,7 @@ void drawLampLight(float posx, float posy, float posz, int lightN)
     //glLightf(usedLight,GL_LINEAR_ATTENUATION,1);
 }
 
-void drawPumpstationHelper(float posx, float posy, float posz, float shadow)
+void drawPumpstationHelper(float posx, float posy, float posz, bool shadow)
 {
     glPushMatrix();
     glScalef(3, 3, 3);
