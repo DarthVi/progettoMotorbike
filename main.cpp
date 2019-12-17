@@ -160,6 +160,20 @@ void SDL_GL_DrawText(TTF_Font *font,char fgR, char fgG, char fgB, char fgA,
 //	glColor3f(0.0f, 0.0f, 0.0f);
 }
 
+char* convertIntToString(int num)
+{
+    int length = snprintf( NULL, 0, "%d", num );
+    char* str = (char*) malloc( sizeof(char) * (length + 1) );
+    snprintf( str, length + 1, "%d", num );
+    return str;
+}
+
+void HUD_RenderText(TTF_Font *font, char* message, int posx, int posy)
+{
+    SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255,
+            message, posx, posy, shaded);
+}
+
 // setta le matrici di trasformazione in modo
 // che le coordinate in spazio oggetto siano le coord 
 // del pixel sullo schemo
@@ -531,7 +545,7 @@ int H = 100;
 
 }
 
-void drawMinimap()
+void HUD_DrawMinimap()
 {
     float moto_px, moto_pz, waypoint_px, waypoint_pz;
 
@@ -693,26 +707,25 @@ void rendering(SDL_Window *win, TTF_Font *font){
   //disegna la minimap in basso a destra
   glPushMatrix();
   glTranslatef(+scrW-150, -scrH+150, 0);
-  drawMinimap();
+  HUD_DrawMinimap();
   glPopMatrix();
 
-  char str[10];
-  sprintf(str, "%d", punteggio);
+
+  char *str = convertIntToString(punteggio);
   char text[] = "Punti: ";
-  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text, str),
-                scrW - 200, scrH - 50, shaded);
+  HUD_RenderText(font, strcat(text, str), scrW-200, scrH-50);
+  free(str);
 
-
-  sprintf(str, "%d", (int)fps);
+  str = convertIntToString((int)fps);
   char text2[] = "FPS: ";
-  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text2, str),
-                    +50, scrH - 50, shaded);
+  HUD_RenderText(font, strcat(text2, str), +50, scrH - 50);
+  free(str);
 
   int remainingTime = TIMEAVAILABLE - (currentTime / CLOCKS_PER_SEC);
+  str = convertIntToString(remainingTime);
   char text3[] = "Tempo: ";
-  sprintf(str, "%d", remainingTime);
-  SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char)255, (char)255, strcat(text3, str),
-                    +50, scrH - 90, shaded);
+  HUD_RenderText(font, strcat(text3, str), +50, scrH - 90);
+  free(str);
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
@@ -746,22 +759,20 @@ void endGame(SDL_Window *win, TTF_Font *font)
 
     glLineWidth(1);
 
-    char points[10];
-    sprintf(points, "%d", punteggio);
+    char* points = convertIntToString(punteggio);
 
     char ptStr[] = "Punti totalizzati: ";
     char gameOverMsg[] = "GAME OVER";
     char continueMsg[] = "Premere un tasto per chiudere l'applicazione";
 
 
-    SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char) 255, (char) 255, gameOverMsg,
-                    scrW / 2 - 75,
-                    scrH / 2 + 100, shaded);
+    HUD_RenderText(font, gameOverMsg, scrW / 2 - 75, scrH / 2 + 100);
 
-    SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char) 255, (char) 255,
-                    strcat(ptStr, points), scrW / 2 - 100, scrH / 2 + 50, shaded);
-    SDL_GL_DrawText(font, 0, 0, 0, 0, (char)255, (char)255, (char) 255, (char) 255, continueMsg,
-                    scrW / 2 -250, scrH / 2, shaded);
+    HUD_RenderText(font, strcat(ptStr, points), scrW / 2 - 100, scrH / 2 + 50);
+    free(points);
+
+    HUD_RenderText(font, continueMsg, scrW / 2 -250, scrH / 2);
+
     glFinish();
 
     SDL_GL_SwapWindow(win);
