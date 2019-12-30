@@ -241,7 +241,7 @@ void drawLampLight(float posx, float posy, float posz, int lightN)
     float tmpPos[4] = {posx, posy, posz,  1}; // ultima comp=1 => luce posizionale
     glLightfv(usedLight, GL_POSITION, tmpPos );
 
-    float tmpDir[4] = { -2, -25, -2, 0 }; // ultima comp=1 => luce posizionale
+    float tmpDir[4] = { -2, -25, -2, 1 }; // ultima comp=1 => luce posizionale
     glLightfv(usedLight, GL_SPOT_DIRECTION, tmpDir );
 
     glLightf (usedLight, GL_SPOT_CUTOFF, 15);
