@@ -643,6 +643,11 @@ void rendering(SDL_Window *win, TTF_Font *font){
   //drawAxis(); // disegna assi frame VISTA
 
   glLightfv(GL_LIGHT0, GL_POSITION, lightPosition );
+  float ambientLight[] = {0.2, 0.2, 0.2, 1};
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
+  glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+  glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+
 
   
   // settiamo matrice di vista

@@ -299,6 +299,7 @@ void setupPumpGunMaterial()
     mat[2] = 0.5;
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.25*128);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 //pump body material: chrome
@@ -315,6 +316,7 @@ void setupPumpBodyMaterial()
     mat[2] = 0.774597;
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6*128);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 void setupDefaultMaterial()
@@ -366,6 +368,7 @@ void setupStatuaMaterial()
     mat[2] = 0.166721;
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.2*128);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 void drawBenchHelper(float posx, float posy, float posz, bool shadow)
