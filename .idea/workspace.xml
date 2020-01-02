@@ -13,11 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5a7eb923-0393-42c4-b288-01e9664208f5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mesh.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/mesh.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mesh.o" beforeDir="false" afterPath="$PROJECT_DIR$/mesh.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/progettoMotorbike" beforeDir="false" afterPath="$PROJECT_DIR$/progettoMotorbike" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/scene.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scene.o" beforeDir="false" afterPath="$PROJECT_DIR$/scene.o" afterDir="false" />
@@ -84,7 +79,7 @@
       <workItem from="1575831721093" duration="59281000" />
       <workItem from="1576687858727" duration="9384000" />
       <workItem from="1577788761864" duration="1226000" />
-      <workItem from="1577958360384" duration="10085000" />
+      <workItem from="1577958360384" duration="11379000" />
     </task>
     <servers />
   </component>

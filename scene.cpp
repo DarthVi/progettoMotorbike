@@ -197,7 +197,7 @@ void drawBarileHelper(float posx, float posy, float posz, bool shadow)
             float t[4]={0,ty,0,  - barileMesh.bbmin.Y()*ty };
             glTexGenfv(GL_S, GL_OBJECT_PLANE, s);
             glTexGenfv(GL_T, GL_OBJECT_PLANE, t);
-            glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
+            //glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
             //glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
 
         }
