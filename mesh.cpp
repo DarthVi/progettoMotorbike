@@ -122,66 +122,57 @@ void Mesh::RenderNxV()
 
 // Render usando la normale per vertice (GOURAUD SHADING)
 // per ogni faccia, applichiamo la texture
-//void Mesh::RenderNxV_TexturedFaces(textures tex, bool shadow)
-//{
-//    if (useWireframe) {
-//        glDisable(GL_TEXTURE_2D);
-//        glColor3f(.5,.5,.5);
-//        RenderWire();
-//        glColor3f(1,1,1);
-//    }
-//
-//    if(!useWireframe && !shadow)
-//    {
-//        glBindTexture(GL_TEXTURE_2D,tex);
-//
-//        glEnable(GL_TEXTURE_2D);
-//        glDisable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
-//        glDisable(GL_TEXTURE_GEN_T);
-//        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-//    }
-//
-//    // mandiamo tutti i triangoli a schermo
-//    glBegin(GL_TRIANGLES);
-//    for (int i=0; i<f.size(); i++)
-//    {
-//        (f[i].v[0])->n.SendAsNormal(); // gouroud shading (o phong?)
-//        if(!useWireframe && !shadow)
-//        {
-//            if(i%2==0)
-//                glTexCoord2f(0.0, 0.0);
-//            else
-//                glTexCoord2f(1.0, 0.0);
-//        }
-//        (f[i].v[0])->p.SendAsVertex();
-//
-//        (f[i].v[1])->n.SendAsNormal();
-//        if(!useWireframe && !shadow)
-//        {
-//            if(i%2==0)
-//                glTexCoord2f(1.0, 0.0);
-//            else
-//                glTexCoord2f(0.0, 1.0);
-//        }
-//        (f[i].v[1])->p.SendAsVertex();
-//
-//        (f[i].v[2])->n.SendAsNormal();
-//        if(!useWireframe && !shadow)
-//        {
-//            if(i%2==0)
-//                glTexCoord2f(0.0, 1.0);
-//            else
-//                glTexCoord2f(1.0,1.0);
-//        }
-//        (f[i].v[2])->p.SendAsVertex();
-//
-//        if(!useWireframe && !shadow)
-//        {
-//            glDisable(GL_TEXTURE_2D);
-//        }
-//    }
-//    glEnd();
-//}
+void Mesh::RenderNxV_TexturedFaces(textures tex, bool shadow)
+{
+    if (useWireframe) {
+        glDisable(GL_TEXTURE_2D);
+        glColor3f(.5,.5,.5);
+        RenderWire();
+        glColor3f(1,1,1);
+    }
+
+    if(!useWireframe && !shadow)
+    {
+        glBindTexture(GL_TEXTURE_2D,tex);
+
+        glEnable(GL_TEXTURE_2D);
+        glDisable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
+        glDisable(GL_TEXTURE_GEN_T);
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    }
+
+    // mandiamo tutti i triangoli a schermo
+    glBegin(GL_TRIANGLES);
+    for (int i=0; i<f.size(); i++)
+    {
+        (f[i].v[0])->n.SendAsNormal(); // gouroud shading (o phong?)
+        if(!useWireframe && !shadow)
+        {
+            glTexCoord2f(0.0, 0.0);
+        }
+        (f[i].v[0])->p.SendAsVertex();
+
+        (f[i].v[1])->n.SendAsNormal();
+        if(!useWireframe && !shadow)
+        {
+            glTexCoord2f(1.0, 0.0);
+        }
+        (f[i].v[1])->p.SendAsVertex();
+
+        (f[i].v[2])->n.SendAsNormal();
+        if(!useWireframe && !shadow)
+        {
+            glTexCoord2f(0.0, 1.0);
+        }
+        (f[i].v[2])->p.SendAsVertex();
+
+        if(!useWireframe && !shadow)
+        {
+            glDisable(GL_TEXTURE_2D);
+        }
+    }
+    glEnd();
+}
 
 // trova l'AXIS ALIGNED BOUNDIG BOX
 void Mesh::ComputeBoundingBox(){

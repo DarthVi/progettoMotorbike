@@ -893,7 +893,7 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
   if (!LoadTexture(RUST, (char *) "textures/rust.jpg")) return 0;
   if (!LoadTexture(MARBLE, (char *) "textures/marble.jpg")) return 0;
   if (!LoadTexture(GOLD, (char *) "textures/gold.jpg")) return 0;
-  if (!LoadTexture(WOOD, (char *) "textures/wood.jpg")) return 0;
+  if (!LoadTexture(WOOD, (char *) "textures/wood5.jpg")) return 0;
 
   initTime = clock();
  

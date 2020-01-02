@@ -382,35 +382,8 @@ void drawBenchHelper(float posx, float posy, float posz, bool shadow)
     if (!shadow)
     {
         glColor3f(1, 1, 1);
-        if (!useWireframe)
-        {
-            glBindTexture(GL_TEXTURE_2D,WOOD);
-
-            glEnable(GL_TEXTURE_2D);
-            glEnable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
-            glEnable(GL_TEXTURE_GEN_T);
-            glEnable(GL_TEXTURE_GEN_R);
-            // ulilizzo le coordinate OGGETTO
-            // cioe' le coordnate originali, PRIMA della moltiplicazione per la ModelView
-            // in modo che la texture sia "attaccata" all'oggetto, e non "proiettata" su esso
-            glTexGeni(GL_S, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
-            glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
-            glTexGeni(GL_R, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
-//            float sz=1.0/(benchMesh.bbmax.Z() - benchMesh.bbmin.Z());
-//            float ty=1.0/(benchMesh.bbmax.Y() - benchMesh.bbmin.Y());
-//            float tx=1.0 / (benchMesh.bbmax.X() - benchMesh.bbmin.X());
-//            float s[4]={0,0,sz,  - benchMesh.bbmin.Z()*sz };
-//            float t[4]={0,ty,0,  - benchMesh.bbmin.Y()*ty };
-//            float r[4] = { tx, 0, 0, -benchMesh.bbmin.X() * tx };
-//            glTexGenfv(GL_S, GL_OBJECT_PLANE, s);
-//            glTexGenfv(GL_T, GL_OBJECT_PLANE, t);
-//            glTexGenfv(GL_R, GL_OBJECT_PLANE, r);
-            glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
-            //glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
-
-        }
     }
-    benchMesh.RenderNxV();
+    benchMesh.RenderNxV_TexturedFaces(WOOD, shadow);
     glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
