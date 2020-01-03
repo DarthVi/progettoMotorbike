@@ -147,6 +147,7 @@ void drawTabelloneHelper(float posx, float posy, float posz, bool shadow)
             glDisable(GL_TEXTURE_GEN_S);
             glDisable(GL_TEXTURE_GEN_T);
             glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+            glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
             //crea un quads ed inserisci una texture le cui coordinate corrispondono
             //ai vertici del bounding box del pannello del tabellone
             glBegin(GL_QUADS);
@@ -191,6 +192,7 @@ void drawBarileHelper(float posx, float posy, float posz, bool shadow)
             // in modo che la texture sia "attaccata" all'oggetto, e non "proiettata" su esso
             glTexGeni(GL_S, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
             glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
+            glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
             float sz=1.0/(barileMesh.bbmax.Z() - barileMesh.bbmin.Z());
             float ty=1.0/(barileMesh.bbmax.Y() - barileMesh.bbmin.Y());
             float s[4]={0,0,sz,  - barileMesh.bbmin.Z()*sz };
