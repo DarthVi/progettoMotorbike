@@ -173,7 +173,7 @@ h1   {text-align: center}
 				<figcaption>Stencil test abilitato</figcaption>
 				</figure>
 				<figure style="text-align: center; display: inline-block;">
-					<img src="images/stencil_off.png" width="400" height="300">
+					<img src="images/stencil_off2.png" width="400" height="300">
 					<figcaption>Stencil test disabilitato</figcaption>
 				</figure>
 			</div>
@@ -186,6 +186,60 @@ h1   {text-align: center}
 		</p>
 		<p>
 			Per quanto riguarda la minimappa presente in basso a destra, è stato disegnato un cerchio e la sua cornice usando rispettivamente <code>GL_TRIANGLE_FAN</code> e <code>GL_LINE_LOOP</code>. Su questo cerchio sono stati successivamente disegnati gli indicatori della moto (in verde) e del waypoint (in rosso), facendo uso di <code>GL_POINTS</code>, previo settaggio della dimensione dei punti a 5 (tramite <code>glPointSize(5)</code>) e abilitazione dello smoothing dei punti (tramite <code>glEnable(GL_POINT_SMOOTH)</code>).
+		</p>
+
+	<h2>Telecamere</h2>
+		<p>
+			Come già detto precedentemente, premendo <code>F1</code> è possibile ciclare attraverso i vari tipi di camera messe a disposizione. Le camere a disposizione sono quelle del progetto Car più un'altra camera, denominata CAMERA_FOLLOW, che permette di seguire la moto da una visuale dall'alto e laterale, in modo da apprezzare inclinazione e rotazione delle ruote.
+			Tuttavia la camera che è possibile ruotare con il mouse non segue la moto, quindi è utile soltanto finché la moto resta all'interno della piramide di vista. Di seguito vengono mostrate le visuali delle camere.
+
+			<div style="display: block;">
+				<figure style="text-align: center; display: inline-block;">
+				<img src="images/camera_back.png" width="400" height="400">
+				<figcaption>Camera dal retro della moto</figcaption>
+				</figure>
+				<figure style="text-align: center; display: inline-block;">
+					<img src="images/camera_laterale.png" width="400" height="400">
+					<figcaption>Camera laterale</figcaption>
+				</figure>
+			</div>
+
+			<div style="display: block;">
+				<figure style="text-align: center; display: inline-block;">
+				<img src="images/camera_top.png" width="400" height="400">
+				<figcaption>Camera dall'alto</figcaption>
+				</figure>
+				<figure style="text-align: center; display: inline-block;">
+					<img src="images/camera_pilot.png" width="400" height="400">
+					<figcaption>Camera che mostra la visuale del pilota</figcaption>
+				</figure>
+			</div>
+
+			<div style="display: block;">
+				<figure style="text-align: center; display: inline-block;">
+				<img src="images/camera_mouse.png" width="400" height="400">
+				<figcaption>Camera che è possibile ruotare col mouse</figcaption>
+				</figure>
+				<figure style="text-align: center; display: inline-block;">
+					<img src="images/camera_top_right.png" width="400" height="400">
+					<figcaption>Camera che segue la moto da una posizione in alto a destra</figcaption>
+				</figure>
+			</div>
+		</p>
+
+	<h2>Schermata di game over</h2>
+		<p>
+			È stata implementata una schermata di game over visualizzata quando scade il tempo a disposizione. Anche in questo caso si fa uso di <code>SDL_GL_DrawText</code> per visualizzare il testo, mentre il background è impostato con colore nero.
+			
+			<figure style="text-align: center; display: block;">
+					<img src="images/game_over.png" width="400" height="400">
+					<figcaption>Schermata di game over</figcaption>
+			</figure>
+		</p>
+
+	<h2>Conclusioni e sviluppi futuri</h2>
+		<p>
+			Durante la realizzazione del progetto è stato decisivo capire l'importanza dell'ordine delle trasformazioni geometriche. Inoltre è stata constatata l'importanza di un corretto uso di <code>glPushMatrix()</code> e <code>glPopMatrix()</code>, in modo tale da gestire bene lo stack di matrici.<br>Per quanto riguarda la panchina, l'applicazione della texture si è rivelata particolarmente difficile, poiché la generazione automatica delle coordinate texture dava risultati insoddisfacenti anche qualora fossero specificate i parametri <code>s</code> e <code>t</code>, da usare nella funzione di generazione delle coordinate. Per questo motivo, come già menzionato nell'apposita sezione di questa documentazione, è stato effettuato il texturing faccia per faccia.<br>L'uso dello stencil è stato impegnativo, ma le difficoltà sono state superate tramite lo studio delle slide e la lettura del codice di esempio <code>glut_OpenGL_ffp/opengl_advanced/reflectdino/reflectdino.c</code><br>Come sviluppi futuri potrebbero essere implementati la collision detection con gli oggetti e un particle engine per arricchire la scena con effetti particellari come il fuoco e il fumo.
 		</p>
 </body>
 
