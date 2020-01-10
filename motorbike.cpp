@@ -30,6 +30,7 @@ Mesh pista((char *)"meshes/pista.obj");
 extern bool useEnvmap; // var globale esterna: per usare l'evnrionment mapping
 extern bool useHeadlight; // var globale esterna: per usare i fari
 extern bool useShadow; // var globale esterna: per generare l'ombra
+extern float lightPosition[];
 
 // da invocare quando e' stato premuto/rilasciato il tasto numero "keycode"
 void Controller::EatKey(int keycode, int* keymap, bool pressed_or_released)
@@ -210,6 +211,13 @@ void Motorbike::Init(){
   raggioRuotaP = 0.35;
   
   grip = 0.45; // quanto il facing macchina si adegua velocemente allo sterzo
+
+  e[0] = 0;
+  e[1] = 0.02;
+  e[2] = 0;
+  n[0] = 0;
+  n[1] = -1;
+  n[2] = 0;
 }
 
 /*
@@ -350,7 +358,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
 }
  
 // disegna a schermo
-void Motorbike::Render(bool isOnWaterpool) const{
+void Motorbike::Render() const{
   // sono nello spazio mondo
   
   //drawAxis(); // disegno assi spazio mondo
@@ -367,15 +375,23 @@ void Motorbike::Render(bool isOnWaterpool) const{
   RenderAllParts(true);
   
   // ombra!
-  if(useShadow && !isOnWaterpool)
+  if(useShadow)
   {
-    glColor3f(0.2,0.2,0.2); // colore fisso
-    glTranslatef(0,0.01,0); // alzo l'ombra di un epsilon per evitare z-fighting con il pavimento
-    glScalef(1.01,0,1.01);  // appiattisco sulla Y, ingrandisco dell'1% sulla Z e sulla X
-    glDisable(GL_LIGHTING); // niente lighing per l'ombra
-    RenderAllParts(false);  // disegno la macchina appiattita
+      glPushMatrix();
 
-    glEnable(GL_LIGHTING);
+      glEnable(GL_STENCIL_TEST);
+      glShadowProjection(lightPosition, e, n);
+      glDisable(GL_LIGHTING);
+      glColor3f(0.2, 0.2, 0.2);
+
+      //non disegna l'ombra se ci si trova sulla pozzanghera
+      glStencilFunc(GL_NOTEQUAL, 1, 0xffffffff);  /* draw if !=1 */
+      glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+      RenderAllParts(false);
+      glEnable(GL_LIGHTING);
+      glDisable(GL_STENCIL_TEST);
+      glPopMatrix();
   } 
   glPopMatrix(); 
   

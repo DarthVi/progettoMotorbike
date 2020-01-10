@@ -4,7 +4,7 @@
 
 #ifndef UTILS_H
 #define UTILS_H
-void glShadowProjection(float * l, float * e, float * n);
+void glShadowProjection(const float * l, const float * e, const float * n);
 
 enum textures
 {

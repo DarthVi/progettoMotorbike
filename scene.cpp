@@ -39,7 +39,7 @@ void drawLampLight(float posx, float posy, float posz, int lightN);
 void drawPumpstationHelper(float posx, float posy, float posz, bool shadow);
 void drawStatuaHelper(float posx, float posy, float posz, bool shadow);
 void drawBenchHelper(float posx, float posy, float posz, bool shadow);
-void castShadow(float posx, float posy, float posz, float e[], float n[], float lPos[],
+void castShadow(float posx, float posy, float posz, const float e[], const float n[], const float lPos[],
         void (*fun_ptr) (float, float, float, bool));
 
 void setupPumpBodyMaterial();
@@ -49,7 +49,7 @@ void setupStatuaMaterial();
 
 //funzione usata per generare l'ombra
 //prende un puntatore alla funzione che si occupa di disegnare l'elemento con o senza ombra
-void castShadow(float posx, float posy, float posz, float e[], float n[], float lPos[],
+void castShadow(float posx, float posy, float posz, const float e[], const float n[], const float lPos[],
         void (*fun_ptr) (float, float, float, bool))
 {
     if(useShadow)
@@ -461,7 +461,7 @@ void Waterpuddle::DrawWaterpuddle(Motorbike mbike, float posx, float posy, float
          (the Y=0 plane) to make a reflection. */
     glScalef(1.0, -1.0, 1.0);
 
-    mbike.Render(true);
+    mbike.Render();
 
     glPopMatrix();
     

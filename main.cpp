@@ -685,7 +685,7 @@ void rendering(SDL_Window *win, TTF_Font *font){
   statua.DrawStatua(-15,+1.3,0);
   bench.DrawBench(-150,0,-20);
 
-  motorbike.Render(false); // disegna la macchina
+  motorbike.Render(); // disegna la macchina
   waypoint.Render(motorbike.px, motorbike.py, motorbike.pz);
 	
   // attendiamo la fine della rasterizzazione di 

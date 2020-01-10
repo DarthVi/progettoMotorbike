@@ -22,7 +22,7 @@ class Motorbike{
 public:
   // Metodi
   void Init(); // inizializza variabili
-  void Render(bool isOnWaterpool) const; // disegna a schermo
+  void Render() const; // disegna a schermo
   void DoStep(); // computa un passo del motore fisico
   Motorbike(){Init();} // costruttore
  
@@ -33,6 +33,8 @@ public:
   float px,py,pz,facing; // posizione e orientamento
   float mozzoA, mozzoP, sterzo; // stato interno
   float vx,vy,vz; // velocita' attuale
+  float e[3];
+  float n[3];
   
   // STATS DELLA MACCHINA
   // (di solito rimangono costanti)

@@ -29,7 +29,7 @@
  * to the plane. Hint: Gray or black color and no lighting
  * looks good for shadows *g*
  */
-void glShadowProjection(float * l, float * e, float * n)
+void glShadowProjection(const float * l, const float * e, const float * n)
 {
     float d, c;
     float mat[16];
