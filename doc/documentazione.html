@@ -131,7 +131,61 @@ h1   {text-align: center}
 
 	<h2>Ombre</h2>
 		<p>
+			Tutti gli oggetti, tranne i waypoints, producono ombre. Tali ombre sono prodotte seguendo l'algoritmo di Blinn (1988), ossia nella seguente maniera:
+			<ul>
+				<li>si costruisce la matrice di proiezione al piano;</li>
+				<li>si applica tale matrice alla geometria 3D di cui si vuole ottenere l'ombra;</li>
+				<li>si disegna l'oggetto piatto con colore ombra.</li>
+			</ul>
+			Nello specifico il codice fa uso della funzione <code><b>glShadowProjection</b></code>, definita in <code>utils.h</code> e <code>utils.cpp</code>, trovata nel tutorial <code>glut_OpenGL_ffp/opengl_advanced/shadow/schatten.cpp</code>.
+			<br>
+			L'ombra della moto, grazie all'abilitazione di <code>GL_STENCIL_TEST</code>, non viene disegnata sulla pozzanghera, in modo da far risaltare il riflesso (sono disponibili maggiori informazioni sul riflesso nella sezione dedicata alla pozzanghera).
 
+			<figure style="text-align: center; display: block;">
+				<img src="images/ombre.png" width="400" height="400">
+				<figcaption>Ombre della moto, della statua e della panchina</figcaption>
+			</figure>
+		</p>
+
+	<h2>Pozzanghera: trasparenza e riflesso</h2>
+		<p>
+			Per gestire trasparenza e riflessione nella pozzanghera sono stati abilitati il blending dei colori e lo stencil test. Nello specifico, per quanto riguarda lo stencil test, viene inizializzato lo stencil a 0. Poi viene disegnata la mesh della pozzanghera nello stencil con valore 1. Infine viene disegnata la seconda moto (la riflessione) solo dove lo stencil è pari a 1, ossia nella pozzanghera. Inoltre lo stencil test viene usato per disegnare l'ombra della moto solo dove non è presente la pozzanghera (ossia dove lo stencil ha valore diverso da 1), in modo tale da far risaltare il riflesso.
+			<br>
+			Grazie a <code>glEnable(GL_BLEND)</code> e a <code>glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)</code> è possibile fare sia il blending della pozzanghera con il riflesso sia il blending della pozzanghera con la texture del pavimento sottostante.
+
+			<div style="display: block;">
+				<figure style="text-align: center; display: inline-block;">
+				<img src="images/riflesso.png" width="400" height="400">
+				<figcaption>Riflesso della moto visualizzato dalla camera che osserva la moto di lato e dall'alto;<br> è possibile notare come l'ombra venga proiettata solo al di fuori della pozzanghera.</figcaption>
+				</figure>
+				<figure style="text-align: center; display: inline-block;">
+					<img src="images/trasparenza.png" width="400" height="400">
+					<figcaption>Riflesso della moto e trasparenza della pozzanghera, con pavimento visibile</figcaption>
+				</figure>
+			</div>
+		</p>
+		<p>
+			Spostando nel codice la pozzanghera nel punto <code>(0,0,0)</code>, usando la camera che permette di muovere la visuale con il mouse e zoomare e abilitando e disabilitando da codice lo stencil test, è possibile confrontare il rendering prodotto con stencil test abilitato con quello prodotto con stencil test disabilitato, come mostrato dalle figure sottostanti.
+
+			<div style="display: block;">
+				<figure style="text-align: center; display: inline-block;">
+				<img src="images/stencil_on.png" width="400" height="300">
+				<figcaption>Stencil test abilitato</figcaption>
+				</figure>
+				<figure style="text-align: center; display: inline-block;">
+					<img src="images/stencil_off.png" width="400" height="300">
+					<figcaption>Stencil test disabilitato</figcaption>
+				</figure>
+			</div>
+		</p>
+
+	<h2>HUD: Heads-up display</h2>
+		<p>
+			L'HUD è composto da due gruppi di elementi: il testo contenente le informazioni sul gioco (FPS, tempo rimanente, punteggio) e la minimappa/radar. <br>
+			La funzione <code>HUD_RenderText</code> fa uso a sua volta della funzione <code>SDL_GL_DrawText</code>, la quale si occupa di usare una <b>SDL_Surface</b> su cui viene scritto il testo e che viene successivamente interpretato come texture. <code>SDL_GL_DrawText</code> fa uso della libreria <b>SDL_TTF</b>, che mette a disposizione varie primitive per scrivere del testo su schermo, e delle funzioni <code>SDL_BlitSurface</code> e <code>SDL_CreateRGBSurface</code>, per creare delle <code>SDL_Surface</code> e copiare una surface su un'altra. Il font usato è <code>FreeSans.ttf</code>.
+		</p>
+		<p>
+			Per quanto riguarda la minimappa presente in basso a destra, è stato disegnato un cerchio e la sua cornice usando rispettivamente <code>GL_TRIANGLE_FAN</code> e <code>GL_LINE_LOOP</code>. Su questo cerchio sono stati successivamente disegnati gli indicatori della moto (in verde) e del waypoint (in rosso), facendo uso di <code>GL_POINTS</code>, previo settaggio della dimensione dei punti a 5 (tramite <code>glPointSize(5)</code>) e abilitazione dello smoothing dei punti (tramite <code>glEnable(GL_POINT_SMOOTH)</code>).
 		</p>
 </body>
 
