@@ -25,10 +25,12 @@ h1   {text-align: center}
 				<li><span style="font-family: monospace;">F4</span>: abilita/disabilita la luce del faro anteriore della moto</li>
 				<li><span style="font-family: monospace;">F5</span>: abilita/disabilita la visualizzazione delle ombre</li>
 			</ul>
+
+			Il gioco dovrebbe supportare anche l'uso di joystick, poiché vengono catturati anche gli eventi <code>SDL_JOYAXISMOTION</code> e <code>SDL_JOYBUTTONDOWN</code>, ma a causa dell'assenza di supporto nativo su Linux per controller XBox 360, tali funzionalità non sono state testate.
 		</p>
 	<h2>Meshes</h2>
 		<p>
-			La maggior parte delle meshes usate è stata scaricata dal sito <a href="https://www.turbosquid.com/">Turbosquid</a>. La mesh del pilota, inizialmente in T-pose, è stata modificata in Blender per apparire seduta sulla moto. La mesh della moto è stata suddivisa in differenti mesh separate (carlinga, ruota anteriore, cerchione anteriore, ruota posteriore, cerchione posteriore), in modo da poter gestire la rotazione e i movimenti delle ruote (è possibile visualizzare i movimenti della ruota anteriore scegliendo un'apposita camera tramite il pulsante  ).
+			La maggior parte delle meshes usate è stata scaricata dal sito <a href="https://www.turbosquid.com/">Turbosquid</a>. La mesh del pilota, inizialmente in T-pose, è stata modificata in Blender per apparire seduta sulla moto. La mesh della moto è stata suddivisa in differenti mesh separate (carlinga, ruota anteriore, cerchione anteriore, ruota posteriore, cerchione posteriore), in modo da poter gestire la rotazione e i movimenti delle ruote (è possibile visualizzare i movimenti della ruota anteriore scegliendo un'apposita camera tramite il pulsante <code>F1</code> ).
 			<br>
 			La mesh della pozzanghera è stata creata in Blender usando delle curve di Bézier; tale curva è stata succesivamente trasformata in mesh e l'interno del contorno definito dalla curva è stato riempito, creando una superficie piana. 
 			<div style="display: block;">
@@ -182,7 +184,7 @@ h1   {text-align: center}
 	<h2>HUD: Heads-up display</h2>
 		<p>
 			L'HUD è composto da due gruppi di elementi: il testo contenente le informazioni sul gioco (FPS, tempo rimanente, punteggio) e la minimappa/radar. <br>
-			La funzione <code>HUD_RenderText</code> fa uso a sua volta della funzione <code>SDL_GL_DrawText</code>, la quale si occupa di usare una <b>SDL_Surface</b> su cui viene scritto il testo e che viene successivamente interpretato come texture. <code>SDL_GL_DrawText</code> fa uso della libreria <b>SDL_TTF</b>, che mette a disposizione varie primitive per scrivere del testo su schermo, e delle funzioni <code>SDL_BlitSurface</code> e <code>SDL_CreateRGBSurface</code>, per creare delle <code>SDL_Surface</code> e copiare una surface su un'altra. Il font usato è <code>FreeSans.ttf</code>.
+			La funzione <code>HUD_RenderText</code> fa uso a sua volta della funzione <code>SDL_GL_DrawText</code> (appresa da un esempio del Professor Casciola, nello specifico nel file <code>sdl2_OpenGL_ffp/SDL2prg2_gl/persp_cube_sdl_gl.c</code>), la quale si occupa di usare una <b>SDL_Surface</b> su cui viene scritto il testo e che viene successivamente interpretato come texture. <code>SDL_GL_DrawText</code> fa uso della libreria <b>SDL_TTF</b>, che mette a disposizione varie primitive per scrivere del testo su schermo, e delle funzioni <code>SDL_BlitSurface</code> e <code>SDL_CreateRGBSurface</code>, per creare delle <code>SDL_Surface</code> e copiare una surface su un'altra. Il font usato è <code>FreeSans.ttf</code>.
 		</p>
 		<p>
 			Per quanto riguarda la minimappa presente in basso a destra, è stato disegnato un cerchio e la sua cornice usando rispettivamente <code>GL_TRIANGLE_FAN</code> e <code>GL_LINE_LOOP</code>. Su questo cerchio sono stati successivamente disegnati gli indicatori della moto (in verde) e del waypoint (in rosso), facendo uso di <code>GL_POINTS</code>, previo settaggio della dimensione dei punti a 5 (tramite <code>glPointSize(5)</code>) e abilitazione dello smoothing dei punti (tramite <code>glEnable(GL_POINT_SMOOTH)</code>).
@@ -218,7 +220,7 @@ h1   {text-align: center}
 			<div style="display: block;">
 				<figure style="text-align: center; display: inline-block;">
 				<img src="images/camera_mouse.png" width="400" height="400">
-				<figcaption>Camera che è possibile ruotare col mouse</figcaption>
+				<figcaption>Camera che è possibile muovere col mouse</figcaption>
 				</figure>
 				<figure style="text-align: center; display: inline-block;">
 					<img src="images/camera_top_right.png" width="400" height="400">
@@ -230,7 +232,7 @@ h1   {text-align: center}
 	<h2>Schermata di game over</h2>
 		<p>
 			È stata implementata una schermata di game over visualizzata quando scade il tempo a disposizione. Anche in questo caso si fa uso di <code>SDL_GL_DrawText</code> per visualizzare il testo, mentre il background è impostato con colore nero.
-			
+
 			<figure style="text-align: center; display: block;">
 					<img src="images/game_over.png" width="400" height="400">
 					<figcaption>Schermata di game over</figcaption>
