@@ -3,6 +3,7 @@
 //
 
 #include "object.h"
+#include <stdlib.h>
 
 class Waypoint : public Object
 {
