@@ -724,16 +724,16 @@ void rendering(SDL_Window *win, TTF_Font *font){
   HUD_RenderText(font, strcat(text, str), scrW-200, scrH-50);
   free(str);
 
-  str = convertIntToString((int)fps);
+  char *str2 = convertIntToString((int)fps);
   char text2[] = "FPS: ";
-  HUD_RenderText(font, strcat(text2, str), +50, scrH - 50);
-  free(str);
+  HUD_RenderText(font, strcat(text2, str2), +50, scrH - 50);
+  free(str2);
 
   int remainingTime = TIMEAVAILABLE - (currentTime / CLOCKS_PER_SEC);
-  str = convertIntToString(remainingTime);
+  char *str3 = convertIntToString(remainingTime);
   char text3[] = "Tempo: ";
-  HUD_RenderText(font, strcat(text3, str), +50, scrH - 90);
-  free(str);
+  HUD_RenderText(font, strcat(text3, str3), +50, scrH - 90);
+  free(str3);
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
