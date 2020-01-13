@@ -11,9 +11,12 @@
 #include <SDL2/SDL_ttf.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <ctime>
 
 #endif
+
+#include <ctime>
+#include <cstdio>
+#include <cstring>
 
 #include "utils.h"
 #include "motorbike.h"
