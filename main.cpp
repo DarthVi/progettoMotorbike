@@ -720,20 +720,20 @@ void rendering(SDL_Window *win, TTF_Font *font){
 
 
   char *str = convertIntToString(punteggio);
-  char text[] = "Punti: ";
+  char text[20] = "Punti: ";
   HUD_RenderText(font, strcat(text, str), scrW-200, scrH-50);
   free(str);
 
-  char *str2 = convertIntToString((int)fps);
-  char text2[] = "FPS: ";
-  HUD_RenderText(font, strcat(text2, str2), +50, scrH - 50);
-  free(str2);
+  str = convertIntToString((int)fps);
+  char text2[20] = "FPS: ";
+  HUD_RenderText(font, strcat(text2, str), +50, scrH - 50);
+  free(str);
 
   int remainingTime = TIMEAVAILABLE - (currentTime / CLOCKS_PER_SEC);
-  char str3[4];
-  sprintf(str3, "%d", remainingTime);
-  char text3[] = "Tempo: ";
-  HUD_RenderText(font, strcat(text3, str3), +50, scrH - 90);
+  str = convertIntToString(remainingTime);
+  char text3[20] = "Tempo: ";
+  HUD_RenderText(font, strcat(text3, str), +50, scrH - 90);
+  free(str);
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
@@ -769,7 +769,7 @@ void endGame(SDL_Window *win, TTF_Font *font)
 
     char* points = convertIntToString(punteggio);
 
-    char ptStr[] = "Punti totalizzati: ";
+    char ptStr[30] = "Punti totalizzati: ";
     char gameOverMsg[] = "GAME OVER";
     char continueMsg[] = "Premere un tasto per chiudere l'applicazione";
 
