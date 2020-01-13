@@ -730,10 +730,10 @@ void rendering(SDL_Window *win, TTF_Font *font){
   free(str2);
 
   int remainingTime = TIMEAVAILABLE - (currentTime / CLOCKS_PER_SEC);
-  char *str3 = convertIntToString(remainingTime);
+  char str3[4];
+  sprintf(str3, "%d", remainingTime);
   char text3[] = "Tempo: ";
   HUD_RenderText(font, strcat(text3, str3), +50, scrH - 90);
-  free(str3);
 
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
