@@ -1,4 +1,0 @@
-/home/vincenzo/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.7142.39/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/vincenzo/progetto_car/progettoCar4
--- Configuring done
--- Generating done
--- Build files have been written to: /home/vincenzo/progetto_car/progettoCar4/cmake-build-debug

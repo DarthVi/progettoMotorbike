@@ -1,3 +1,5 @@
 *.o
 progettoMotorbike
+.idea/*
+cmake-build-debug/*
 
