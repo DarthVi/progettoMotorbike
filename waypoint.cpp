@@ -80,8 +80,7 @@ void Waypoint::drawWaypoint(bool shadow)
 //simple check to see if we pass through the waypoint
 bool Waypoint::checkCollision(float px, float py, float pz)
 {
-    return (px >= pos_x - 1 && px <= pos_x + 1 && py >= pos_y - 1 && py <= pos_y + 1
-            && pz >= pos_z - 1 && pz <= pos_z + 1);
+    return (px >= pos_x - 1.5 && px <= pos_x + 1.5 && pz >= pos_z - 1.5 && pz <= pos_z + 1.5);
 }
 
 void Waypoint::Render(float px, float py, float pz)
