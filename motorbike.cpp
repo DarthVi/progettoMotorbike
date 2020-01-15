@@ -30,6 +30,7 @@ Mesh pista((char *)"meshes/pista.obj");
 extern bool useEnvmap; // var globale esterna: per usare l'evnrionment mapping
 extern bool useHeadlight; // var globale esterna: per usare i fari
 extern bool useShadow; // var globale esterna: per generare l'ombra
+extern bool useWireframe;
 extern float lightPosition[];
 
 // da invocare quando e' stato premuto/rilasciato il tasto numero "keycode"
@@ -314,18 +315,17 @@ void Motorbike::RenderAllParts(bool usecolor) const{
     if (usecolor) glColor3f(1,0,0);     // colore rosso, da usare con Lighting
   }
   else {
-    if (usecolor) SetupEnvmapTexture();
+    if (usecolor && !useWireframe) SetupEnvmapTexture();
   }
   carlinga.RenderNxV(); // rendering delle mesh carlinga usando normali per vertice
 
-  glDisable(GL_TEXTURE_GEN_S);
-  glDisable(GL_TEXTURE_GEN_T);
-  glDisable(GL_TEXTURE_2D);
+  if(useEnvmap && !useWireframe)
+      glDisable(GL_TEXTURE_2D);
+
   if (usecolor) glEnable(GL_LIGHTING);
 
     glPushMatrix();
 
-    glDisable(GL_TEXTURE_2D);
     glTranslate(wheelFR1.Center() );
     glRotatef(sterzo,0,1,0);
     glRotatef(-mozzoA,1,0,0);
@@ -335,7 +335,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
     //if (usecolor) SetupWheelTexture(wheelFR1.bbmin,wheelFR1.bbmax);
     wheelFR1.RenderNxF(); // la ruota viene meglio FLAT SHADED - normali per faccia
                             // provare x credere
-    glDisable(GL_TEXTURE_2D);
+
     if (usecolor) glColor3f(0.9,0.9,0.9);
     wheelFR2.RenderNxV();
     glPopMatrix();
@@ -349,7 +349,7 @@ void Motorbike::RenderAllParts(bool usecolor) const{
     if (usecolor) glColor3f(.2,.2,.2);
     //if (usecolor) SetupWheelTexture(wheelBR1.bbmin,wheelBR1.bbmax);
     wheelBR1.RenderNxF();
-    glDisable(GL_TEXTURE_2D);
+
     if (usecolor) glColor3f(0.9,0.9,0.9);
     wheelBR2.RenderNxV();
     glPopMatrix();
