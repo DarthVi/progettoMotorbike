@@ -21,7 +21,7 @@ h1   {text-align: center}
 			<ul>
 				<li><span style="font-family: monospace;">F1</span>: cicla attraverso i vari tipi di camera</li>
 				<li><span style="font-family: monospace;">F2</span>: abilita/disabilita la visualizzazione wireframe</li>
-				<li><span style="font-family: monospace;">F3</span>: abilita/disabilita l'environment mapping della carlinga della moto</li>
+				<li><span style="font-family: monospace;">F3</span>: abilita/disabilita l'environment mapping della statua</li>
 				<li><span style="font-family: monospace;">F4</span>: abilita/disabilita la luce del faro anteriore della moto</li>
 				<li><span style="font-family: monospace;">F5</span>: abilita/disabilita la visualizzazione delle ombre</li>
 			</ul>
@@ -48,14 +48,14 @@ h1   {text-align: center}
 
 	<h2>Textures</h2>
 		<p>
-			Nel gioco sono state applicate diverse textures: sul pavimento, sul tabellone, sulla carlinga della moto, sui waypoints, sulla panchina e sui barili.
+			Nel gioco sono state applicate diverse textures: sul pavimento, sul tabellone, sui waypoints, sulla panchina, sui barili e sulla statua.
 			<br>
 			Per quanto riguarda il pavimento, è stata applicata una texture specificando manualmente le coordinate texture per ogni vertice di ogni quad che costituisce il pavimento, tramite <code>glTexCoord2f</code>. Il colore della textures viene poi moltiplicato per il colore scelto per il pavimento, componente per componente.
 			<br>
 			Per quanto concerne il tabellone, è stata applicata una foto personale nella seguente maniera: viene creato un quad, tramite <code>glBegin(GL_QUADS)</code>, le cui coordinate corrispondono ai vertici del bounding box della parte superiore del tabellone (il pannello); si specificano poi manualmente le coordinate textures per ogni vertice del quad.
 
 			<figure style="text-align: center; display: block;">
-				<img src="images/tabellone_foto.png" width="400" height="300">
+				<img src="images/tabellone_foto.png" width="400" height="400">
 				<figcaption>Tabellone con la foto</figcaption>
 			</figure>
 		</p>
@@ -63,13 +63,19 @@ h1   {text-align: center}
 			Per i barili è stata invece abilitata la generazione automatica delle coordinate textures, tramite <code>glEnable(GL_TEXTURE_GEN_S)</code> e <code>glEnable(GL_TEXTURE_GEN_T)</code>, specificando poi <code>s</code> e <code>t</code>, ossia i coefficienti da usare nella corrispondente funzione per la generazione delle coordinate texture, tramite <code>glTexGenfv(GL_S, GL_OBJECT_PLANE, s)</code> e <code>glTexGenfv(GL_S, GL_OBJECT_PLANE, t)</code>. La texture generation function è scelta usando il parametro <code>GL_OBJECT_LINEAR</code> in <code>glTexGeni(GL_S, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR)</code>
 			e <code>glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR)</code>. Il risultato è mostrato nella foto sottostante.
 
-			<figure style="text-align: center; display: block;">
-				<img src="images/barili_texture.png" width="35%" height="35%">
-				<figcaption>Barili con texture</figcaption>
-			</figure>
+			<div style="display: block;">
+				<figure style="text-align: center; display: inline-block;">
+					<img src="images/barili_texture.png" width="400" height="400">
+					<figcaption>Barili con texture</figcaption>
+				</figure>
+				<figure style="text-align: center; display: inline-block;">
+					<img src="images/statua_envmap.png" width="400" height="400">
+					<figcaption>Statua con environment mapping</figcaption>
+				</figure>
+			</div>
 		</p>
 		<p>
-			La texture della carlinga viene applicata usando la tecnica dell'environment mapping, specificando il parametro <code>GL_SPHERE_MAP</code> in <code>glTexGeni</code>.
+			La texture della statua viene applicata usando la tecnica dell'environment mapping, specificando il parametro <code>GL_SPHERE_MAP</code> in <code>glTexGeni</code>.
 			<br>
 			Per quanto riguarda la panchina, per avere risultati gradevoli alla vista, è stata applicata una texture ad ogni faccia/triangolo della mesh, aggiungendo al file <code>mesh.cpp</code> la funzione <code>void Mesh::RenderNxV_TexturedFaces</code>. È stata effettuata questa scelta perché la generazione automatica delle coordinate texture produceva risultati sgradevoli (la texture appariva "stretchata" e allungata eccessivamente).
 			<br>
@@ -106,7 +112,7 @@ h1   {text-align: center}
 		</p>
 		<br>
 		<p>
-			Per quanto riguarda la statua, la pompa della benzina e la pistola della pompa della benzina, sono stati settati i materiali, in modo da fare in modo che la luce si comporti in maniera diversa su queste componenti. Ciò è stato fatto specificando i parametri delle componenti ambientale, riflessa diffusa e speculare precedentemente menzionate. Qui sotto viene riportato come esempio la funzione <code>setupStatuaMaterial</code> usata per configurare il materiale della statua (bronzo):
+			Per quanto riguarda la statua, la pompa della benzina, la pistola della pompa della benzina, la carlinga della moto e i suoi cerchioni, sono stati settati i materiali, in modo da fare in modo che la luce si comporti in maniera diversa su queste componenti. Ciò è stato fatto specificando i parametri delle componenti ambientale, riflessa diffusa e speculare precedentemente menzionate. Qui sotto viene riportato come esempio la funzione <code>setupStatuaMaterial</code> usata per configurare il materiale della statua (bronzo) qualora l'environment mapping ad essa applicato venga disattivato:
 			<pre>
 			<code>
 			float mat[4] = {0.2125, 0.1275, 0.054, 1.0};
@@ -124,6 +130,11 @@ h1   {text-align: center}
 			</code>
 			</pre>
 			I valori per i materiali sono stati ottenuti dal sito <a href="http://devernay.free.fr/cours/opengl/materials.html">devernay</a>.
+
+			<figure style="text-align: center; display: block;">
+				<img src="images/statua_material.png" width="400" height="400">
+				<figcaption>Statua in bronzo senza environment mapping</figcaption>
+			</figure>
 		</p>
 
 	<h2>Waypoint</h2>
@@ -171,11 +182,11 @@ h1   {text-align: center}
 
 			<div style="display: block;">
 				<figure style="text-align: center; display: inline-block;">
-				<img src="images/stencil_on.png" width="400" height="300">
+				<img src="images/stencil_on.png" width="400" height="400">
 				<figcaption>Stencil test abilitato</figcaption>
 				</figure>
 				<figure style="text-align: center; display: inline-block;">
-					<img src="images/stencil_off2.png" width="400" height="300">
+					<img src="images/stencil_off2.png" width="400" height="400">
 					<figcaption>Stencil test disabilitato</figcaption>
 				</figure>
 			</div>
@@ -184,7 +195,7 @@ h1   {text-align: center}
 	<h2>HUD: Heads-up display</h2>
 		<p>
 			L'HUD è composto da due gruppi di elementi: il testo contenente le informazioni sul gioco (FPS, tempo rimanente, punteggio) e la minimappa/radar. <br>
-			La funzione <code>HUD_RenderText</code> fa uso a sua volta della funzione <code>SDL_GL_DrawText</code> (appresa da un esempio del Professor Casciola, nello specifico nel file <code>sdl2_OpenGL_ffp/SDL2prg2_gl/persp_cube_sdl_gl.c</code>), la quale si occupa di usare una <b>SDL_Surface</b> su cui viene scritto il testo e che viene successivamente interpretato come texture. <code>SDL_GL_DrawText</code> fa uso della libreria <b>SDL_TTF</b>, che mette a disposizione varie primitive per scrivere del testo su schermo, e delle funzioni <code>SDL_BlitSurface</code> e <code>SDL_CreateRGBSurface</code>, per creare delle <code>SDL_Surface</code> e copiare una surface su un'altra. Il font usato è <code>FreeSans.ttf</code>.
+			La funzione <code>HUD_RenderText</code> fa uso a sua volta della funzione <code>SDL_GL_DrawText</code> (appresa da un esempio del Professor Casciola, nello specifico nel filex <code>sdl2_OpenGL_ffp/SDL2prg2_gl/persp_cube_sdl_gl.c</code>), la quale si occupa di usare una <b>SDL_Surface</b> su cui viene scritto il testo e che viene successivamente interpretato come texture. <code>SDL_GL_DrawText</code> fa uso della libreria <b>SDL_TTF</b>, che mette a disposizione varie primitive per scrivere del testo su schermo, e delle funzioni <code>SDL_BlitSurface</code> e <code>SDL_CreateRGBSurface</code>, per creare delle <code>SDL_Surface</code> e copiare una surface su un'altra. Il font usato è <code>FreeSans.ttf</code>.
 		</p>
 		<p>
 			Per quanto riguarda la minimappa presente in basso a destra, è stato disegnato un cerchio e la sua cornice usando rispettivamente <code>GL_TRIANGLE_FAN</code> e <code>GL_LINE_LOOP</code>. Su questo cerchio sono stati successivamente disegnati gli indicatori della moto (in verde) e del waypoint (in rosso), facendo uso di <code>GL_POINTS</code>, previo settaggio della dimensione dei punti a 5 (tramite <code>glPointSize(5)</code>) e abilitazione dello smoothing dei punti (tramite <code>glEnable(GL_POINT_SMOOTH)</code>).
