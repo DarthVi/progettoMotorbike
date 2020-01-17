@@ -21,6 +21,7 @@
 extern bool useShadow;
 extern float lightPosition[];
 extern bool useWireframe;
+extern bool useEnvmap;
 
 Mesh tabelloneStruct((char *) "meshes/smallBillboardBase.obj");
 Mesh tabellonePanel((char *) "meshes/smallBillboardPanel.obj");
@@ -85,19 +86,6 @@ void Barile::DrawBarile(float posx, float posy, float posz, float lightPos[])
 void Streetlamp::DrawStreetlamp(float posx, float posy, float posz)
 {
     drawStreetLampHelper(posx, posy, posz, false);
-
-    //disegna l'ombra
-//    if (useShadow)
-//    {
-//        glPushMatrix();
-//
-//        glShadowProjection(lightPosition, e, n);
-//        glDisable(GL_LIGHTING);
-//        glColor3f(0.2, 0.2, 0.2);
-//        drawStreetLampHelper(posx, posy, posz, true);
-//        glEnable(GL_LIGHTING);
-//        glPopMatrix();
-//    }
 }
 
 void Pumpstation::DrawPumpstation(float posx, float posy, float posz, float lightPos[])
@@ -304,20 +292,20 @@ void setupPumpGunMaterial()
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
-//pump body material: chrome
+//pump body material: brass
 void setupPumpBodyMaterial()
 {
-    float mat[4] = {0.25, 0.25, 0.25, 1.0};
+    float mat[4] = {0.329412, 0.223529, 0.027451, 1.0};
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
-    mat[0] = 0.4;
-    mat[1] = 0.4;
-    mat[2] = 0.4;
+    mat[0] = 0.780392;
+    mat[1] = 0.568627;
+    mat[2] = 0.113725;
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
-    mat[0] = 0.774597;
-    mat[1] = 0.774597;
-    mat[2] = 0.774597;
+    mat[0] = 0.992157;
+    mat[1] = 0.941176;
+    mat[2] = 0.807843;
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
-    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6*128);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.21794872*128);
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
@@ -345,12 +333,27 @@ void drawStatuaHelper(float posx, float posy, float posz, bool shadow)
 
         setupStatuaMaterial();
         glColor3f(.65, .49, .24);
+        if(!useWireframe && useEnvmap)
+        {
+            // facciamo binding con la texture 1
+            glBindTexture(GL_TEXTURE_2D,GOLD);
+
+            glEnable(GL_TEXTURE_2D);
+            glEnable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
+            glEnable(GL_TEXTURE_GEN_T);
+            glTexGeni(GL_S, GL_TEXTURE_GEN_MODE , GL_SPHERE_MAP); // Env map
+            glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_SPHERE_MAP);
+            glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
+            glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
+        }
     }
     glTranslatef(posx, posy, posz);
     glRotated(90, 0, 1, 0);
 
     statuaMesh.RenderNxV();
     setupDefaultMaterial();
+    glDisable(GL_TEXTURE_2D);
+    glEnable(GL_LIGHTING);
     glPopMatrix();
 
     glPopMatrix();

@@ -263,95 +263,6 @@ void drawAxis(){
 
 }
 
-/*
-//vecchio codice ora commentato
-// disegna un cubo rasterizzando quads
-void drawCubeFill()
-{
-const float S=100;
-
-  glBegin(GL_QUADS); 
-    
-    glNormal3f(  0,0,+1  );
-    glVertex3f( +S,+S,+S );
-    glVertex3f( -S,+S,+S );
-    glVertex3f( -S,-S,+S );
-    glVertex3f( +S,-S,+S );
-
-    glNormal3f(  0,0,-1  );
-    glVertex3f( +S,-S,-S );
-    glVertex3f( -S,-S,-S );
-    glVertex3f( -S,+S,-S );
-    glVertex3f( +S,+S,-S );
-
-    glNormal3f(  0,+1,0  );
-    glVertex3f( +S,+S,+S );
-    glVertex3f( -S,+S,+S );
-    glVertex3f( -S,+S,-S );
-    glVertex3f( +S,+S,-S );
-
-    glNormal3f(  0,-1,0  );
-    glVertex3f( +S,-S,-S );
-    glVertex3f( -S,-S,-S );
-    glVertex3f( -S,-S,+S );
-    glVertex3f( +S,-S,+S );
-
-    glNormal3f( +1,0,0  );
-    glVertex3f( +S,+S,+S );
-    glVertex3f( +S,-S,+S );
-    glVertex3f( +S,-S,-S );
-    glVertex3f( +S,+S,-S );
-
-    glNormal3f( -1,0,0  );
-    glVertex3f( -S,+S,-S );
-    glVertex3f( -S,-S,-S );
-    glVertex3f( -S,-S,+S );
-    glVertex3f( -S,+S,+S );
-
-  glEnd();
-}
-
-// disegna un cubo in wireframe
-void drawCubeWire()
-{
-  glBegin(GL_LINE_LOOP); // faccia z=+1
-    glVertex3f( +1,+1,+1 );
-    glVertex3f( -1,+1,+1 );
-    glVertex3f( -1,-1,+1 );
-    glVertex3f( +1,-1,+1 );
-  glEnd();
-
-  glBegin(GL_LINE_LOOP); // faccia z=-1
-    glVertex3f( +1,-1,-1 );
-    glVertex3f( -1,-1,-1 );
-    glVertex3f( -1,+1,-1 );
-    glVertex3f( +1,+1,-1 );
-  glEnd();
-
-  glBegin(GL_LINES);  // 4 segmenti da -z a +z
-    glVertex3f( -1,-1,-1 );
-    glVertex3f( -1,-1,+1 );
-
-    glVertex3f( +1,-1,-1 );
-    glVertex3f( +1,-1,+1 );
-
-    glVertex3f( +1,+1,-1 );
-    glVertex3f( +1,+1,+1 );
-
-    glVertex3f( -1,+1,-1 );
-    glVertex3f( -1,+1,+1 );  
-  glEnd();
-}
-
-void drawCube()
-{
-  glColor3f(.9,.9,.9);
-  drawCubeFill();
-  glColor3f(0,0,0);
-  drawCubeWire();
-}
-*/
-
 void drawSphere(double r, int lats, int longs) {
 int i, j;
   for(i = 0; i <= lats; i++) {
@@ -395,18 +306,6 @@ void drawFloor()
       glDisable(GL_TEXTURE_GEN_T);
       glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
   }
-  /*
-  //vecchio codice ora commentato
-  // disegna un quad solo 
-  glBegin(GL_QUADS);
-    glColor3f(0.5, 0.2, 0.0);
-    glNormal3f(0,1,0);
-    glVertex3d(-S, H, -S);
-    glVertex3d(+S, H, -S);
-    glVertex3d(+S, H, +S);
-    glVertex3d(-S, H, +S);
-  glEnd();
-  */
   
   // disegna KxK quads, ad ogni quad viene applicata la texture del terreno
   glBegin(GL_QUADS);
@@ -537,7 +436,6 @@ int H = 100;
         glColor3f(1,1,1);
         glDisable(GL_LIGHTING);
 
-     //   drawCubeFill();
         drawSphere(100.0, 20, 20);
 
         glDisable(GL_TEXTURE_GEN_S);
@@ -654,23 +552,14 @@ void rendering(SDL_Window *win, TTF_Font *font){
 
   
   // settiamo matrice di vista
-  //glTranslatef(0,0,-eyeDist);
-  //glRotatef(viewBeta,  1,0,0);
-  //glRotatef(viewAlpha, 0,1,0);
   setCamera();
 
-  
-  //drawAxis(); // disegna assi frame MONDO
 
   static float tmpcol[4] = {1,1,1,  1};
   glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, tmpcol);
   glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 127);
   
   glEnable(GL_LIGHTING);
- 
-  // settiamo matrice di modellazione
-  //drawAxis(); // disegna assi frame OGGETTO
-  //drawCubeWire();
 
 
 
@@ -896,15 +785,13 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
                                     // frammenti generati dalla
                                     // rasterizzazione poligoni
   glPolygonOffset(1,1);             // indietro di 1
-  
-  if (!LoadTexture(LOGO,(char *)"textures/logo.jpg")) return 0;
-  if (!LoadTexture(ENVMAPCARLINGA,(char *)"textures/envmap_flipped.jpg")) return 0;
+
   if (!LoadTexture(SKY,(char *)"textures/sky_ok.jpg")) return -1;
   if (!LoadTexture(ROAD, (char *) "textures/roadTS3.jpg")) return 0;
   if (!LoadTexture(MYPHOTO, (char *) "textures/me.jpg")) return 0;
   if (!LoadTexture(RUST, (char *) "textures/rust.jpg")) return 0;
   if (!LoadTexture(MARBLE, (char *) "textures/marble.jpg")) return 0;
-  if (!LoadTexture(GOLD, (char *) "textures/gold.jpg")) return 0;
+  if (!LoadTexture(GOLD, (char *) "textures/fresnelgoldmap.jpg")) return 0;
   if (!LoadTexture(WOOD, (char *) "textures/wood5.jpg")) return 0;
 
   initTime = clock();

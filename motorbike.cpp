@@ -47,41 +47,47 @@ void Controller::Joy(int keymap, bool pressed_or_released)
     key[keymap]=pressed_or_released;
 }
 
-// Funzione che prepara tutto per usare un env map
-void SetupEnvmapTexture()
+//material: chrome
+void setupChromeMaterial()
 {
-  // facciamo binding con la texture 1
-  glBindTexture(GL_TEXTURE_2D,ENVMAPCARLINGA);
-   
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_TEXTURE_GEN_S); // abilito la generazione automatica delle coord texture S e T
-  glEnable(GL_TEXTURE_GEN_T);
-  glTexGeni(GL_S, GL_TEXTURE_GEN_MODE , GL_SPHERE_MAP); // Env map
-  glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_SPHERE_MAP);
-  glColor3f(1,1,1); // metto il colore neutro (viene moltiplicato col colore texture, componente per componente)
-  glDisable(GL_LIGHTING); // disabilito il lighting OpenGL standard (lo faccio con la texture)
+    float mat[4] = {0.25, 0.25, 0.25, 1.0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+    mat[0] = 0.4;
+    mat[1] = 0.4;
+    mat[2] = 0.4;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+    mat[0] = 0.774597;
+    mat[1] = 0.774597;
+    mat[2] = 0.774597;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.6*128);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
-// funzione che prepara tutto per creare le coordinate texture (s,t) da (x,y,z)
-// Mappo l'intervallo [ minY , maxY ] nell'intervallo delle T [0..1]
-//     e l'intervallo [ minZ , maxZ ] nell'intervallo delle S [0..1]
-void SetupWheelTexture(Point3 min, Point3 max){
-  glBindTexture(GL_TEXTURE_2D,LOGO);
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_TEXTURE_GEN_S);
-  glEnable(GL_TEXTURE_GEN_T);
-  
-  // ulilizzo le coordinate OGGETTO
-  // cioe' le coordnate originali, PRIMA della moltiplicazione per la ModelView
-  // in modo che la texture sia "attaccata" all'oggetto, e non "proiettata" su esso
-  glTexGeni(GL_S, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
-  glTexGeni(GL_T, GL_TEXTURE_GEN_MODE , GL_OBJECT_LINEAR);
-  float sz=1.0/(max.Z() - min.Z());
-  float ty=1.0/(max.Y() - min.Y());
-  float s[4]={0,0,sz,  - min.Z()*sz };
-  float t[4]={0,ty,0,  - min.Y()*ty };
-  glTexGenfv(GL_S, GL_OBJECT_PLANE, s); 
-  glTexGenfv(GL_T, GL_OBJECT_PLANE, t); 
+//default material
+void setupDefMaterial()
+{
+    float tmpcol[4] = {1,1,1,  1};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, tmpcol);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, tmpcol);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 127);
+}
+
+//material: black rubber
+void setupBlackRubberMaterial()
+{
+    float mat[4] = {0.02, 0.02, 0.02, 1.0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat);
+    mat[0] = 0.01;
+    mat[1] = 0.01;
+    mat[2] = 0.01;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, mat);
+    mat[0] = 0.4;
+    mat[1] = 0.4;
+    mat[2] = 0.4;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.078125*128);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 //fissa un muro invisibile che ci permette di non andare oltre lo skybox
@@ -107,9 +113,9 @@ void Motorbike::DoStep(){
   // computiamo l'evolversi della macchina
   static int i=5;
   
-  float vxm, vym, vzm; // velocita' in spazio macchina
+  float vxm, vym, vzm; // velocita' in spazio motorbike
   
-  // da vel frame mondo a vel frame macchina
+  // da vel frame mondo a vel frame motorbike
   float cosf = cos(facing*M_PI/180.0);
   float sinf = sin(facing*M_PI/180.0);
   vxm = +cosf*vx - sinf*vz;
@@ -129,7 +135,7 @@ void Motorbike::DoStep(){
   vym*=attritoY;
   vzm*=attritoZ;
   
-  // l'orientamento della macchina segue quello dello sterzo
+  // l'orientamento della moto segue quello dello sterzo
   // (a seconda della velocita' sulla z)
   facing = facing - (vzm*grip)*sterzo;
   
@@ -152,39 +158,14 @@ void Motorbike::DoStep(){
 
   //evito che la moto vada oltre lo skybox
   handleInvisibleWall(&px, &pz);
-} 
-
-//void drawCube(); // questa e' definita altrove (quick hack)
-void drawAxis(); // anche questa
-
-void drawPista () {
-        glPushMatrix();
-        glColor3f(0.4,0.4,.8);
-        glScalef(0.75, 1.0, 0.75);
-        glTranslatef(0,0.01,0);
-        //pista.RenderNxV();
-        pista.RenderNxF();
-        glPopMatrix();
 }
-
-/*
-// diesgna una ruota come due cubi intersecati a 45 gradi
-void drawWheel(){
-  glPushMatrix();
-  glScalef(1, 1.0/sqrt(2.0),  1.0/sqrt(2.0));
-  drawCube();
-  glRotatef(45,  1,0,0);
-  drawCube();
-  glPopMatrix();
-}
-*/
 
 void Controller::Init(){
   for (int i=0; i<NKEYS; i++) key[i]=false;
 }
 
 void Motorbike::Init(){
-  // inizializzo lo stato della macchina
+  // inizializzo lo stato della moto
   px=pz=facing=0; // posizione e orientamento
   py=0.0;
   
@@ -203,7 +184,7 @@ void Motorbike::Init(){
   // 1 = no attrito
   // <<1 = attrito grande
   attritoZ = 0.991;  // piccolo attrito sulla Z (nel senso di rotolamento delle ruote)
-  attritoX = 0.8;  // grande attrito sulla X (per non fare slittare la macchina)
+  attritoX = 0.8;  // grande attrito sulla X (per non fare slittare la moto)
   attritoY = 1.0;  // attrito sulla y nullo
   
   // Nota: vel max = accMax*attritoZ / (1-attritoZ)
@@ -211,7 +192,7 @@ void Motorbike::Init(){
   raggioRuotaA = 0.25;
   raggioRuotaP = 0.35;
   
-  grip = 0.45; // quanto il facing macchina si adegua velocemente allo sterzo
+  grip = 0.45; // quanto il facing moto si adegua velocemente allo sterzo
 
   e[0] = 0;
   e[1] = 0.02;
@@ -221,49 +202,7 @@ void Motorbike::Init(){
   n[2] = 0;
 }
 
-/*
-//vecchio codice ora commentato
-// disegna carlinga composta da 1 cubo traslato e scalato
-static void drawCarlinga(){
-  // disegna carlinga
-  
-  glColor3f(1,0,0);
-  
-  // sono nel frame CAR
-  glPushMatrix();
-  
-  // vado al frame pezzo_A
-  glScalef(0.25 , 0.14 , 1);
-  drawCube();  
-  
-  // torno al frame CAR
-  glPopMatrix();
-  
-  // vado frame pezzo_B
-  glPushMatrix();
-  glTranslatef(0,-0.11,-0.95);
-  glScalef(0.6, 0.05, 0.15);
-  drawCube();
-  glPopMatrix();
- 
-   // vado frame pezzo_C
-  glPushMatrix();
-  glTranslatef(0,-0.11,0);
-  glScalef(0.6, 0.05, 0.3);
-  drawCube();
-  glPopMatrix();
-  
-  // vado frame pezzo_D
-  glPushMatrix();
-  glRotatef(-5,1,0,0);
-  glTranslatef(0,+0.2,+0.95);
-  glScalef(0.6, 0.05, 0.3);
-  drawCube();
-  glPopMatrix();
-}
-*/
-
-// attiva una luce di openGL per simulare un faro della macchina
+// attiva una luce di openGL per simulare un faro della moto
 void Motorbike::DrawHeadlight(float x, float y, float z, int lightN, bool useHeadlight) const{
   int usedLight=GL_LIGHT1 + lightN;
   
@@ -294,35 +233,23 @@ void Motorbike::DrawHeadlight(float x, float y, float z, int lightN, bool useHea
 }
 
 
-// funzione che disegna tutti i pezzi della macchina
-// (carlinga, + 4 route)
-// (da invocarsi due volte: per la macchina, e per la sua ombra)
+// funzione che disegna tutti i pezzi della moto
+// (carlinga, + 2 route)
+// (da invocarsi due volte: per la moto, e per la sua ombra)
 // (se usecolor e' falso, NON sovrascrive il colore corrente
 //  e usa quello stabilito prima di chiamare la funzione)
 void Motorbike::RenderAllParts(bool usecolor) const{
-  
-  // drawCarlinga(); // disegna la carliga con pochi parallelepidedi
-  
+
   // disegna la carliga e il pilota con una mesh
   glPushMatrix();
-  glScalef(-0.15,0.15,-0.15); // patch: riscaliamo la mesh di 1/10
+  glScalef(-0.15,0.15,-0.15); // patch: riscaliamo la mesh
   glTranslatef(0.0,2.5,0.0); //transalte the veicle up the floor
   if (usecolor) glColor3f(0.5,0.5,0.5);
-  //glDisable(GL_TEXTURE_2D);
   pilot.RenderNxV();
-  if (!useEnvmap)
-  {
-    if (usecolor) glColor3f(1,0,0);     // colore rosso, da usare con Lighting
-  }
-  else {
-    if (usecolor && !useWireframe) SetupEnvmapTexture();
-  }
+
+  setupChromeMaterial();
+  if (usecolor) glColor3f(1,0,0);     // colore rosso, da usare con Lighting
   carlinga.RenderNxV(); // rendering delle mesh carlinga usando normali per vertice
-
-  if(useEnvmap && !useWireframe)
-      glDisable(GL_TEXTURE_2D);
-
-  if (usecolor) glEnable(GL_LIGHTING);
 
     glPushMatrix();
 
@@ -331,44 +258,45 @@ void Motorbike::RenderAllParts(bool usecolor) const{
     glRotatef(-mozzoA,1,0,0);
     glTranslate( -wheelFR1.Center() );
 
+    setupDefMaterial();
     if (usecolor) glColor3f(.2,.2,.2);
-    //if (usecolor) SetupWheelTexture(wheelFR1.bbmin,wheelFR1.bbmax);
     wheelFR1.RenderNxF(); // la ruota viene meglio FLAT SHADED - normali per faccia
                             // provare x credere
 
+    setupChromeMaterial();
     if (usecolor) glColor3f(0.9,0.9,0.9);
     wheelFR2.RenderNxV();
     glPopMatrix();
 
     glPushMatrix();
     glTranslate(wheelBR1.Center() );
-    //glRotatef( sterzo,0,1,0);
     glRotatef(-mozzoA,1,0,0);
     glTranslate( -wheelBR1.Center() );
 
+    setupDefMaterial();
     if (usecolor) glColor3f(.2,.2,.2);
-    //if (usecolor) SetupWheelTexture(wheelBR1.bbmin,wheelBR1.bbmax);
     wheelBR1.RenderNxF();
 
+    setupChromeMaterial();
     if (usecolor) glColor3f(0.9,0.9,0.9);
     wheelBR2.RenderNxV();
     glPopMatrix();
 
-  glPopMatrix(); 
+  glPopMatrix();
+
+  setupDefMaterial();
 }
  
 // disegna a schermo
 void Motorbike::Render() const{
   // sono nello spazio mondo
-  
-  //drawAxis(); // disegno assi spazio mondo
+
   glPushMatrix();
      
   glTranslatef(px,py,pz);
   glRotatef(facing, 0,1,0);
 
-  // sono nello spazio MACCHINA
-  //drawAxis(); // disegno assi spazio macchina
+  // sono nello spazio MOTO
   
   DrawHeadlight(0,0,-1, 0, useHeadlight); // accendi faro
 
