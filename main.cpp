@@ -765,6 +765,7 @@ static int keymap[Controller::NKEYS] = {SDLK_a, SDLK_d, SDLK_w, SDLK_s};
   SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 ); 
   SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
   SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 1 );
+  glClearStencil(0x0);
 
   // facciamo una finestra di scrW x scrH pixels
   win=SDL_CreateWindow(argv[0], 0, 0, scrW, scrH, SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE);
