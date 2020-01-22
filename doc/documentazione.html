@@ -250,6 +250,11 @@ h1   {text-align: center}
 			</figure>
 		</p>
 
+	<h2>Skybox</h2>
+		<p>
+			Lo skybox è costruito usando una sfera a cui viene applicata la texture del cielo tramite environment mapping (ossia usando <code>GL_SPHERE_MAP</code>). In <code>motorbike.cpp</code> la funzione <code>handleInvisibleWall(float *posx, float *posz)</code> si occupa di fissare un muro invisibile nella mappa, in modo da evitare che la moto vada oltre lo skybox.
+		</p>
+
 	<h2>Performance</h2>
 		<p>
 			Sulla piattaforma di sviluppo (Fedora 30 su Intel Core i5-5300U, Intel HD Graphics 5500) il gioco viene eseguito con una media di 39 FPS, con rari picchi di minimo a 21 FPS. Disattivando le ombre, si riescono a raggiungere i 60 FPS. Ne consegue che gran parte del peso computazionale è dovuto all'algoritmo di generazione delle ombre.
