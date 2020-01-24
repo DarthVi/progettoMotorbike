@@ -52,7 +52,7 @@ h1   {text-align: center}
 			<br>
 			Per quanto riguarda il pavimento, è stata applicata una texture specificando manualmente le coordinate texture per ogni vertice di ogni quad che costituisce il pavimento, tramite <code>glTexCoord2f</code>. Il colore della textures viene poi moltiplicato per il colore scelto per il pavimento, componente per componente.
 			<br>
-			Per quanto concerne il tabellone, è stata applicata una foto personale nella seguente maniera: viene creato un quad, tramite <code>glBegin(GL_QUADS)</code>, le cui coordinate corrispondono ai vertici del bounding box della parte superiore del tabellone (il pannello); si specificano poi manualmente le coordinate textures per ogni vertice del quad.
+			Per quanto concerne il tabellone, è stata applicata una foto personale nella seguente maniera: viene creato un quad, tramite <code>glBegin(GL_QUADS)</code>, le cui coordinate corrispondono ai vertici del bounding box della parte superiore del tabellone (il pannello); si specificano poi manualmente le coordinate textures per ogni vertice del quad. È stata inoltre abilitata l'interpolazione con correzione prospettica mediante <code>glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST)</code>.
 
 			<figure style="text-align: center; display: block;">
 				<img src="images/tabellone_foto.png" width="400" height="400">
