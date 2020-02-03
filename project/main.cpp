@@ -73,8 +73,6 @@ Uint32 timeLastInterval=0; // quando e' cominciato l'ultimo intervallo
 enum textquality {solid, shaded, blended};
 uint font_id = -1;
 
-extern void drawPista();
-
 void SDL_GL_DrawText(TTF_Font *font,char fgR, char fgG, char fgB, char fgA,
                      char bgR, char bgG, char bgB, char bgA, char *text, int x, int y,
                      enum textquality quality)
